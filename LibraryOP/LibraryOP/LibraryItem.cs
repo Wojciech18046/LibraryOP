@@ -2,7 +2,7 @@
 
 namespace LibraryOP
 {
-    public class LibraryItem
+    public abstract class LibraryItem
     {
         public int Id { get; }
         public int BarCode { get; }

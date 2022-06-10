@@ -18,7 +18,8 @@ namespace LibraryOP
             Console.WriteLine("Witamy w programie LibraryOP.");
             Graphic();
             Console.WriteLine("Naciśnij dowolny klawisz, aby kontynuować.");
-            string opcja = Console.ReadLine();
+            Console.ReadKey();
+            string opcja = "0";
             while (opcja != "9")
             {
                 MenuOptions();

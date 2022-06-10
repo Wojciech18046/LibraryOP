@@ -6,10 +6,8 @@ using System.Text;
 namespace LibraryOP
 {
     public class Library
-    {
-        //TODO: add class user
-        //public List<User> Users { get; }
-        //public User UserId;
+    { 
+        public List<User> Users { get; set; }
         public List<LibraryItem> Items { get; set; }
         public void AddItem(LibraryItem item)
         {
@@ -62,23 +60,27 @@ namespace LibraryOP
             
                 if(item is Movie)
                 {
+                    var movie = (Movie)item;
                     Console.WriteLine("Movie:");
-                    Console.WriteLine($"Director: {item.Director} | Genre: {item.Genre} | Duration: {item.Duration}min");
+                    Console.WriteLine($"Director: {movie.Director} | Genre: {movie.Genre} | Duration: {movie.Duration}min");
                 }
                 else if(item is Magazine)
                 {
+                    var magazine = (Magazine)item;
                     Console.WriteLine("Magazine:");
-                    Console.WriteLine($"Subject: {item.Subject}");
+                    Console.WriteLine($"Subject: {magazine.Subject}");
                 }
                 else if(item is Book)
                 {
+                    var book = (Book)item;
                     Console.WriteLine("Book:");
-                    Console.WriteLine($"Genre: {item.Genre}");
+                    Console.WriteLine($"Genre: {book.Genre}");
                 }
                 else if(item is ScientificPaper)
                 {
+                    var scientificPaper = (ScientificPaper)item;
                     Console.WriteLine("ScientificPaper:");
-                    Console.WriteLine(value: $"ScienceField: {item.ScienceField} | Journal: {item.Journal}");
+                    Console.WriteLine($"ScienceField: {scientificPaper.ScienceField} | Journal: {scientificPaper.Journal}");
                 }
             Console.WriteLine($"ID: {item.Id} | Name: {item.Name} | Available: {!item.IsRented} | Rented By (ID): {item.RentedById} | BarCode: {item.BarCode}");
             Console.WriteLine("--------------------------------------------------------------------");
@@ -86,7 +88,7 @@ namespace LibraryOP
         }
         public void AddUser(User user)
         {
-            this.Items.Add(item);
+            this.Users.Add(user);
             //TODO: Add save to DB #2
         }
         public void RemoveUser(int id)
@@ -94,7 +96,7 @@ namespace LibraryOP
             var user = this.Users.FirstOrDefault(x => x.Id == id);
             if (user != null)
             {
-                Items.Remove(user);
+                Users.Remove(user);
                 //TODO: Remove from DB #2
             }
             else
@@ -104,7 +106,12 @@ namespace LibraryOP
         }
         public void ListUsers()
         {
-
+            foreach(var user in Users)
+            {
+                Console.WriteLine($"ID: {user.Id} | Name: {user.Name} | Email: {user.Email}");
+                Console.WriteLine($"Address: {user.Address}");
+                Console.WriteLine("------------------------------");
+            }
         }
     }
 }

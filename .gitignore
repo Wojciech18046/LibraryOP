@@ -2,6 +2,7 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/LibraryOP/LibraryOP/obj
-/LibraryOP/LibraryOP/bin
-/LibraryOP/LibraryOP/.vs
+/LibraryOP/LibraryOP/obj/*
+/LibraryOP/LibraryOP/bin/*
+/LibraryOP/.vs/*
+

@@ -4,10 +4,17 @@ using System.Text;
 
 namespace LibraryOP
 {
-    public class Book
+    public class Book : LibraryItem, IPublication
     {
+
         public string Genre { get; }
-
-
+        public int PageCount { get; }
+        public string Author { get; }
+        public Book(int barCode, string name, string genre, int count, string autor) : base(barCode, name)
+        {
+            Genre = genre;
+            this.PageCount = count;
+            this.Author = autor;
+        }
     }
 }

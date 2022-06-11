@@ -6,58 +6,54 @@ namespace LibraryOP
     {
         static void Main(string[] args)
         {
-
-            Console.WriteLine("Hello World!!!");
-            Console.WriteLine("Hello World!!!");
             Menu();
         }
 
         static void Menu()
         {
-            Console.Clear();
             Console.WriteLine("Witamy w programie LibraryOP.");
             Graphic();
             Console.WriteLine("Naciśnij dowolny klawisz, aby kontynuować.");
             Console.ReadKey();
-            string opcja = "0";
-            while (opcja != "9")
+            string choice = "0";
+            while (choice != "9")
             {
                 MenuOptions();
-                opcja = Console.ReadLine();
-                if (opcja == "1")
+                choice = Console.ReadLine();
+                if (choice == "1")
                 {
-                    Console.WriteLine("Opcja chwilowo Niedostępna");
+                    Console.WriteLine("Opcja #1 chwilowo Niedostępna");
                     
                 }
-                else if (opcja == "2")
+                else if (choice == "2")
                 {
-                    Console.WriteLine("Opcja chwilowo Niedostępna");
+                    Console.WriteLine("Opcja #2 chwilowo Niedostępna");
                 }
-                else if (opcja == "3")
+                else if (choice == "3")
                 {
-                    Console.WriteLine("Opcja chwilowo Niedostępna");
+                    Console.WriteLine("Opcja #3 chwilowo Niedostępna");
                 }
-                else if (opcja == "4")
+                else if (choice == "4")
                 {
-                    Console.WriteLine("Opcja chwilowo Niedostępna");
+                    Console.WriteLine("Opcja #4 chwilowo Niedostępna");
                 }
-                else if (opcja == "5")
+                else if (choice == "5")
                 {
-                    Console.WriteLine("Opcja chwilowo Niedostępna");
+                    Console.WriteLine("Opcja #5 chwilowo Niedostępna");
                 }
-                else if (opcja == "6")
+                else if (choice == "6")
                 {
-                    Console.WriteLine("Opcja chwilowo Niedostępna");
+                    Console.WriteLine("Opcja #6 chwilowo Niedostępna");
                 }
-                else if (opcja == "7")
+                else if (choice == "7")
                 {
-                    Console.WriteLine("Opcja chwilowo Niedostępna");
+                    Console.WriteLine("Opcja #7 chwilowo Niedostępna");
                 }
-                else if (opcja == "8")
+                else if (choice == "8")
                 {
-                    Console.WriteLine("Opcja chwilowo Niedostępna");
+                    Console.WriteLine("Opcja #8 chwilowo Niedostępna");
                 }
-                else if (opcja == "9")
+                else if (choice == "9")
                 {
                     Console.WriteLine("Dziękujemy za skorzystanie z naszego programu.");
                 }

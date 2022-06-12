@@ -23,170 +23,36 @@ namespace LibraryOP
                 MenuOptions();
                 choice = Console.ReadLine();
                 if (choice == "1")
-                {                    
-                    Console.WriteLine("1. Dodaj książkę.");
-                    Console.WriteLine("2. Dodaj magazyn.");
-                    Console.WriteLine("3. Dodaj film.");
-                    Console.WriteLine("4. Dodaj magazy6n naukowy.");
-                    string addChoice = Console.ReadLine();
-                    if (addChoice == "1")
-                    {
-                        Console.WriteLine("Proszę wprowadzić....... (Do przebudowy)");
-                        int barCode = int.Parse(Console.ReadLine()); //TODO: Omowienie generatoru kodu kreskoiwego. 
-                        Console.WriteLine("Proszę wprowadzić nazwę.");
-                        string name = Console.ReadLine();
-                        Console.WriteLine("Proszę wprowadzić gatunek.");
-                        string genre = Console.ReadLine();                        
-                        Console.WriteLine("Proszę wprowadzić autora.");
-                        string autor = Console.ReadLine();
-                        Console.WriteLine("Proszę wprowadzić ilość stron.");
-                        if (int.TryParse(Console.ReadLine(), out int count))
-                        {
-                            Book book = new Book(barCode, name, genre, count, autor);
-                            library.AddItem(book);
-                        }
-                        else
-                        {
-                            Console.WriteLine("Wprowadzona wartość nie jest numerem stron.");
-                        }
-                    }
-                    else if(addChoice == "2")
-                    {
-                        Console.WriteLine("Proszę wprowadzić....... (Do przebudowy)");
-                        int barCode = int.Parse(Console.ReadLine()); //TODO: Omowienie generatoru kodu kreskoiwego. 
-                        Console.WriteLine("Proszę wprowadzić nazwę.");
-                        string name = Console.ReadLine();
-                        Console.WriteLine("Proszę wprowadzić temat.");
-                        string subject = Console.ReadLine();
-                        Console.WriteLine("Proszę wprowadzić autora.");
-                        string autor = Console.ReadLine();
-                        Console.WriteLine("Proszę wprowadzić ilość stron.");
-                        if (int.TryParse(Console.ReadLine(), out int count))
-                        {
-                            Magazine magazine = new Magazine(barCode, name, subject, count, autor);
-                            library.AddItem(magazine);
-                        }
-                        else
-                        {
-                            Console.WriteLine("Wprowadzona wartość nie jest numerem stron.");
-                        }
-                    }
-                    else if(addChoice == "3")
-                    {
-                        Console.WriteLine("Proszę wprowadzić....... (Do przebudowy)");
-                        int barCode = int.Parse(Console.ReadLine()); //TODO: Omowienie generatoru kodu kreskoiwego. 
-                        Console.WriteLine("Proszę wprowadzić nazwę.");
-                        string name = Console.ReadLine();
-                        Console.WriteLine("Proszę wprowadzić gatunek.");
-                        string genre = Console.ReadLine();
-                        Console.WriteLine("Proszę wprowadzić reżysera.");
-                        string director = Console.ReadLine();
-                        Console.WriteLine("Proszę wprowadzić czas trwania.");
-                        if (int.TryParse(Console.ReadLine(), out int duration))
-                        {
-                            Movie movie = new Movie(barCode, name, genre, duration, director);
-                            library.AddItem(movie);
-                        }
-                        else
-                        {
-                            Console.WriteLine("Wprowadzona wartość nie jest czasem trwania filmu.");
-                        }
-                    }
-                    else if(addChoice == "4")
-                    {
-                        Console.WriteLine("Proszę wprowadzić....... (Do przebudowy)");
-                        int barCode = int.Parse(Console.ReadLine()); //TODO: Omowienie generatoru kodu kreskoiwego. 
-                        Console.WriteLine("Proszę wprowadzić nazwę.");
-                        string name = Console.ReadLine();
-                        Console.WriteLine("Proszę wprowadzić dziedzinę naukową.");
-                        string scienceField = Console.ReadLine();
-                        Console.WriteLine("Proszę wprowadzić publikacje.");
-                        string journal = Console.ReadLine();
-                        Console.WriteLine("Proszę wprowadzić autora.");
-                        string autor = Console.ReadLine();
-                        Console.WriteLine("Proszę wprowadzić ilość stron.");
-                        if (int.TryParse(Console.ReadLine(), out int count))
-                        {
-                            ScientificPaper scientificPaper = new ScientificPaper(barCode, name, scienceField, journal, count, autor);
-                            library.AddItem(scientificPaper);
-                        }
-                        else
-                        {
-                            Console.WriteLine("Wprowadzona wartość nie jest numerem stron.");
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine("Nie wybrałeś opcji z listy.");
-                    }
+                {
+                    MenuAddItem(library);
                 }
                 else if (choice == "2")
                 {
-                    if(int.TryParse(Console.ReadLine(), out int id))
-                    {
-                        library.RemoveItem(id);
-                    }
-                    else
-                    {
-                        Console.WriteLine("Wprowadzona wartoiść nie jest numerem ID.");
-                    }
+                    MenuRemoveItem(library);
                 }
                 else if (choice == "3")
                 {
-                    Console.WriteLine("Proszę wprowadzić numer ID przedmiotu, następnie numer ID użytkownika.");
-                    if (int.TryParse(Console.ReadLine(), out int id) && int.TryParse(Console.ReadLine(), out int userid))
-                    {
-                        library.RentItem(id, userid);
-                    }
-                    else
-                    {
-                        Console.WriteLine("Wprowadzona wartoiść nie jest numerem ID.");
-                    }
+                    MenuRentItem(library);
                 }
                 else if (choice == "4")
                 {
-                    Console.WriteLine("Proszę wprowadzić numer ID przedmiotu, który chcesz oddać.");
-                    if(int.TryParse(Console.ReadLine(), out int id))
-                    {
-                        library.ReturnItem(id);
-                    }
-                    else
-                    {
-                        Console.WriteLine("Wprowadzona wartoiść nie jest numerem ID.");
-                    }
+                    MenuReturnItem(library);
                 }
                 else if (choice == "5")
                 {
-                    Console.WriteLine("Lista wszystkich przedmiotów.");
-                    library.ListItems();
+                    MenuListItems(library);
                 }
                 else if (choice == "6")
                 {
-                    Console.WriteLine("Wprowadź nazwę użytkownika.");
-                    string name = Console.ReadLine();
-                    Console.WriteLine("Wprowadź adres email.");
-                    string email = Console.ReadLine();
-                    Console.WriteLine("Wprowadź adres użytkownika.");
-                    string adres = Console.ReadLine();
-                    User user = new User(name, email, adres);
-                    library.AddUser(user);
+                    MenuAddUser(library);
                 }
                 else if (choice == "7")
                 {
-                    Console.WriteLine("Proszę wprowadzić numer ID użytkownika, którego chcesz usunąć.");
-                    if(int.TryParse(Console.ReadLine(), out int id))
-                    {
-                        library.RemoveUser(id);
-                    }
-                    else
-                    {
-                        Console.WriteLine("Wprowadzona wartoiść nie jest numerem ID.");
-                    }                    
+                    MenuRemoveUser(library);
                 }
                 else if (choice == "8")
                 {
-                    Console.WriteLine("Lista wszystkich użytkowników.");
-                    library.ListUsers();
+                    MenuListUsers(library);
                 }
                 else if (choice == "9")
                 {
@@ -241,6 +107,173 @@ namespace LibraryOP
                               "|~~|===|--|===|~|~~|%%|~~~|--|:::|=|~|----|==|---|=|\n" +
                               "----------------------------------------------------");
         }
+        static void MenuAddItem(Library library)
+        {
+            Console.WriteLine("1. Dodaj książkę.");
+            Console.WriteLine("2. Dodaj magazyn.");
+            Console.WriteLine("3. Dodaj film.");
+            Console.WriteLine("4. Dodaj magazy6n naukowy.");
+            string addChoice = Console.ReadLine();
+            if (addChoice == "1")
+            {
+                Console.WriteLine("Proszę wprowadzić....... (Do przebudowy)");
+                int barCode = int.Parse(Console.ReadLine()); //TODO: Omowienie generatoru kodu kreskoiwego. 
+                Console.WriteLine("Proszę wprowadzić nazwę.");
+                string name = Console.ReadLine();
+                Console.WriteLine("Proszę wprowadzić gatunek.");
+                string genre = Console.ReadLine();
+                Console.WriteLine("Proszę wprowadzić autora.");
+                string autor = Console.ReadLine();
+                Console.WriteLine("Proszę wprowadzić ilość stron.");
+                if (int.TryParse(Console.ReadLine(), out int count))
+                {
+                    Book book = new Book(barCode, name, genre, count, autor);
+                    library.AddItem(book);
+                }
+                else
+                {
+                    Console.WriteLine("Wprowadzona wartość nie jest numerem stron.");
+                }
+            }
+            else if (addChoice == "2")
+            {
+                Console.WriteLine("Proszę wprowadzić....... (Do przebudowy)");
+                int barCode = int.Parse(Console.ReadLine()); //TODO: Omowienie generatoru kodu kreskoiwego. 
+                Console.WriteLine("Proszę wprowadzić nazwę.");
+                string name = Console.ReadLine();
+                Console.WriteLine("Proszę wprowadzić temat.");
+                string subject = Console.ReadLine();
+                Console.WriteLine("Proszę wprowadzić autora.");
+                string autor = Console.ReadLine();
+                Console.WriteLine("Proszę wprowadzić ilość stron.");
+                if (int.TryParse(Console.ReadLine(), out int count))
+                {
+                    Magazine magazine = new Magazine(barCode, name, subject, count, autor);
+                    library.AddItem(magazine);
+                }
+                else
+                {
+                    Console.WriteLine("Wprowadzona wartość nie jest numerem stron.");
+                }
+            }
+            else if (addChoice == "3")
+            {
+                Console.WriteLine("Proszę wprowadzić....... (Do przebudowy)");
+                int barCode = int.Parse(Console.ReadLine()); //TODO: Omowienie generatoru kodu kreskoiwego. 
+                Console.WriteLine("Proszę wprowadzić nazwę.");
+                string name = Console.ReadLine();
+                Console.WriteLine("Proszę wprowadzić gatunek.");
+                string genre = Console.ReadLine();
+                Console.WriteLine("Proszę wprowadzić reżysera.");
+                string director = Console.ReadLine();
+                Console.WriteLine("Proszę wprowadzić czas trwania.");
+                if (int.TryParse(Console.ReadLine(), out int duration))
+                {
+                    Movie movie = new Movie(barCode, name, genre, duration, director);
+                    library.AddItem(movie);
+                }
+                else
+                {
+                    Console.WriteLine("Wprowadzona wartość nie jest czasem trwania filmu.");
+                }
+            }
+            else if (addChoice == "4")
+            {
+                Console.WriteLine("Proszę wprowadzić....... (Do przebudowy)");
+                int barCode = int.Parse(Console.ReadLine()); //TODO: Omowienie generatoru kodu kreskoiwego. 
+                Console.WriteLine("Proszę wprowadzić nazwę.");
+                string name = Console.ReadLine();
+                Console.WriteLine("Proszę wprowadzić dziedzinę naukową.");
+                string scienceField = Console.ReadLine();
+                Console.WriteLine("Proszę wprowadzić publikacje.");
+                string journal = Console.ReadLine();
+                Console.WriteLine("Proszę wprowadzić autora.");
+                string autor = Console.ReadLine();
+                Console.WriteLine("Proszę wprowadzić ilość stron.");
+                if (int.TryParse(Console.ReadLine(), out int count))
+                {
+                    ScientificPaper scientificPaper = new ScientificPaper(barCode, name, scienceField, journal, count, autor);
+                    library.AddItem(scientificPaper);
+                }
+                else
+                {
+                    Console.WriteLine("Wprowadzona wartość nie jest numerem stron.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Nie wybrałeś opcji z listy.");
+            }
+        }
+        static void MenuRemoveItem(Library library)
+        {
+            if (int.TryParse(Console.ReadLine(), out int id))
+            {
+                library.RemoveItem(id);
+            }
+            else
+            {
+                Console.WriteLine("Wprowadzona wartoiść nie jest numerem ID.");
+            }
+        }
+        static void MenuRentItem(Library library)
+        {
+            Console.WriteLine("Proszę wprowadzić numer ID przedmiotu, następnie numer ID użytkownika.");
+            if (int.TryParse(Console.ReadLine(), out int id) && int.TryParse(Console.ReadLine(), out int userid))
+            {
+                library.RentItem(id, userid);
+            }
+            else
+            {
+                Console.WriteLine("Wprowadzona wartoiść nie jest numerem ID.");
+            }
+        }
+        static void MenuReturnItem(Library library)
+        {
+            Console.WriteLine("Proszę wprowadzić numer ID przedmiotu, który chcesz oddać.");
+            if (int.TryParse(Console.ReadLine(), out int id))
+            {
+                library.ReturnItem(id);
+            }
+            else
+            {
+                Console.WriteLine("Wprowadzona wartoiść nie jest numerem ID.");
+            }
+        }
+        static void MenuListItems(Library library)
+        {
+            Console.WriteLine("Lista wszystkich przedmiotów.");
+            library.ListItems();
+        }
+        static void MenuAddUser(Library library)
+        {
+            Console.WriteLine("Wprowadź nazwę użytkownika.");
+            string name = Console.ReadLine();
+            Console.WriteLine("Wprowadź adres email.");
+            string email = Console.ReadLine();
+            Console.WriteLine("Wprowadź adres użytkownika.");
+            string adres = Console.ReadLine();
+            User user = new User(name, email, adres);
+            library.AddUser(user);
+        }
+        static void MenuRemoveUser(Library library)
+        {
+            Console.WriteLine("Proszę wprowadzić numer ID użytkownika, którego chcesz usunąć.");
+            if (int.TryParse(Console.ReadLine(), out int id))
+            {
+                library.RemoveUser(id);
+            }
+            else
+            {
+                Console.WriteLine("Wprowadzona wartoiść nie jest numerem ID.");
+            }
+        }
+        static void MenuListUsers(Library library)
+        {
+            Console.WriteLine("Lista wszystkich użytkowników.");
+            library.ListUsers();
+        }
+
 
     }
 }

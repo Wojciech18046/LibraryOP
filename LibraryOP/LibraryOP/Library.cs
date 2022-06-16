@@ -6,7 +6,7 @@ using System.Text;
 namespace LibraryOP
 {
     public class Library : ILibrary
-    { 
+    {
         public List<User> Users { get; set; }
         public List<LibraryItem> Items { get; set; }
         public void AddItem(LibraryItem item)
@@ -31,19 +31,44 @@ namespace LibraryOP
         {
             var item = this.Items.FirstOrDefault(x => x.Id == id);
             var user = this.Users.FirstOrDefault(y => y.Id == userid);
-            if (item != null && user != null)
+            //checker for available for item
+            int barcodeCounter = 0, rentCounter = 0;
+            foreach (var checker in Items)
             {
-                item.RentedById = userid;
-                item.IsRented = true;
+                if (checker.BarCode == item.BarCode)
+                {
+                    barcodeCounter++;
+                }
+                if (item.RentedById != null)
+                {
+                    rentCounter++;
+                }
+            }
+            
+            if (barcodeCounter != rentCounter)
+            {
+                if (item != null && user != null && item.IsRented != true)//second lite security provided
+                {
+                    item.RentedById = userid;
+                    item.IsRented = true;
+                }
+                else if (item.IsRented == true)
+                {
+                    throw new InvalidOperationException("Wybrany egzemplarz jest wypozyczony");
+                }
+                else
+                {
+                    throw new InvalidOperationException("Nieprawidlowy ID przedmiotu/uzytkownikow lub ta pozycja nie istnieje...");
+                }
             }
             else
             {
-                throw new InvalidOperationException("Nieprawidlowy ID przedmiotu/uzytkownikow lub ta pozycja nie istnieje...");
+                throw new InvalidOperationException("Wszystkie egzemplarze tego przedmiotu sa wypozyczone");
             }
         }
         public void ReturnItem(int id)
         {
-            var item=Items.FirstOrDefault(x => x.Id == id);
+            var item = Items.FirstOrDefault(x => x.Id == id);
             if (item != null && item.IsRented != false)//lite security that its not misstake
             {
                 item.RentedById = null;
@@ -56,35 +81,35 @@ namespace LibraryOP
         }
         public void ListItems()
         {
-            foreach(var item in Items)
+            foreach (var item in Items)
             {
-            
-                if(item is Movie)
+
+                if (item is Movie)
                 {
                     var movie = (Movie)item;
                     Console.WriteLine("Movie:");
                     Console.WriteLine($"Director: {movie.Director} | Genre: {movie.Genre} | Duration: {movie.Duration}min");
                 }
-                else if(item is Magazine)
+                else if (item is Magazine)
                 {
                     var magazine = (Magazine)item;
                     Console.WriteLine("Magazine:");
                     Console.WriteLine($"Subject: {magazine.Subject}");
                 }
-                else if(item is Book)
+                else if (item is Book)
                 {
                     var book = (Book)item;
                     Console.WriteLine("Book:");
                     Console.WriteLine($"Genre: {book.Genre}");
                 }
-                else if(item is ScientificPaper)
+                else if (item is ScientificPaper)
                 {
                     var scientificPaper = (ScientificPaper)item;
                     Console.WriteLine("ScientificPaper:");
                     Console.WriteLine($"ScienceField: {scientificPaper.ScienceField} | Journal: {scientificPaper.Journal}");
                 }
-            Console.WriteLine($"ID: {item.Id} | Name: {item.Name} | Available: {!item.IsRented} | Rented By (ID): {item.RentedById} | BarCode: {item.BarCode}");
-            Console.WriteLine("--------------------------------------------------------------------");
+                Console.WriteLine($"ID: {item.Id} | Name: {item.Name} | Available: {!item.IsRented} | Rented By (ID): {item.RentedById} | BarCode: {item.BarCode}");
+                Console.WriteLine("--------------------------------------------------------------------");
             }
         }
         public void AddUser(User user)
@@ -107,7 +132,7 @@ namespace LibraryOP
         }
         public void ListUsers()
         {
-            foreach(var user in Users)
+            foreach (var user in Users)
             {
                 Console.WriteLine($"ID: {user.Id} | Name: {user.Name} | Email: {user.Email}");
                 Console.WriteLine($"Address: {user.Address}");

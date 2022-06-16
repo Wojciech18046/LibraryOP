@@ -9,10 +9,10 @@ namespace LibraryOP
     { 
         public List<User> Users { get; set; }
         public List<LibraryItem> Items { get; set; }
+
         public void AddItem(LibraryItem item)
         {
             this.Items.Add(item);
-            //TODO: Add save to DB #1
         }
         public void RemoveItem(int id)
         {
@@ -20,7 +20,6 @@ namespace LibraryOP
             if (item != null)
             {
                 Items.Remove(item);
-                //TODO: Remove from DB #1
             }
             else
             {
@@ -89,7 +88,6 @@ namespace LibraryOP
         public void AddUser(User user)
         {
             this.Users.Add(user);
-            //TODO: Add save to DB #2
         }
         public void RemoveUser(int id)
         {
@@ -112,6 +110,15 @@ namespace LibraryOP
                 Console.WriteLine($"Address: {user.Address}");
                 Console.WriteLine("------------------------------");
             }
+        }
+
+        public void SaveDb()
+        {
+            DBHandler.WriteDb((List<Book>)Items.Where(x => x.GetType() == typeof(Book)));
+            DBHandler.WriteDb((List<Movie>)Items.Where(x => x.GetType() == typeof(Movie)));
+            DBHandler.WriteDb((List<Magazine>)Items.Where(x => x.GetType() == typeof(Magazine)));
+            DBHandler.WriteDb((List<ScientificPaper>)Items.Where(x => x.GetType() == typeof(ScientificPaper)));
+            DBHandler.WriteDb((List<User>)Items.Where(x => x.GetType() == typeof(User)));
         }
     }
 }

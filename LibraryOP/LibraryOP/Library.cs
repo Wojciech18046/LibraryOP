@@ -27,49 +27,32 @@ namespace LibraryOP
                 throw new InvalidOperationException("Nieprawidlowy ID lub ta pozycja nie istnieje...");
             }
         }
-        public void RentItem(int id, int userid)//added check for user existing
+        public void RentItem(int barCode, int userid)//added check for user existing
         {
-            var item = this.Items.FirstOrDefault(x => x.Id == id);
-            var user = this.Users.FirstOrDefault(y => y.Id == userid);
-            //checker for available for item
-            int barcodeCounter = 0, rentCounter = 0;
-            foreach (var checker in Items)
+            var user = this.Users.SingleOrDefault(y => y.Id == userid);
+
+            if (user == null)
             {
-                if (checker.BarCode == item.BarCode)
-                {
-                    barcodeCounter++;
-                }
-                if (item.RentedById != null)
-                {
-                    rentCounter++;
-                }
+                throw new InvalidOperationException("Użytkownik nie istnieje w bazie danych.");
             }
-            
-            if (barcodeCounter != rentCounter)
+
+            var itemsToRent = Items.Where(i => i.BarCode == barCode && i.IsRented == false && i.RentedById == null);
+
+            if (itemsToRent.Any())
             {
-                if (item != null && user != null && item.IsRented != true)//second lite security provided
-                {
-                    item.RentedById = userid;
-                    item.IsRented = true;
-                }
-                else if (item.IsRented == true)
-                {
-                    throw new InvalidOperationException("Wybrany egzemplarz jest wypozyczony");
-                }
-                else
-                {
-                    throw new InvalidOperationException("Nieprawidlowy ID przedmiotu/uzytkownikow lub ta pozycja nie istnieje...");
-                }
+                var rentItem = itemsToRent.First();
+                rentItem.RentedById = userid;
+                rentItem.IsRented = true;
             }
             else
             {
-                throw new InvalidOperationException("Wszystkie egzemplarze tego przedmiotu sa wypozyczone");
+                throw new InvalidOperationException("Brak wolnych egzemplarzy lub książka nie istnieje w bazie danych.");
             }
         }
         public void ReturnItem(int id)
         {
             var item = Items.FirstOrDefault(x => x.Id == id);
-            if (item != null && item.IsRented != false)//lite security that its not misstake
+            if (item != null && item.IsRented == true)//lite security that its not misstake
             {
                 item.RentedById = null;
                 item.IsRented = false;
@@ -81,34 +64,33 @@ namespace LibraryOP
         }
         public void ListItems()
         {
-            foreach (var item in Items)
+            foreach (var item in Items.OrderBy(x => x.GetType()))
             {
-
                 if (item is Movie)
                 {
                     var movie = (Movie)item;
-                    Console.WriteLine("Movie:");
-                    Console.WriteLine($"Director: {movie.Director} | Genre: {movie.Genre} | Duration: {movie.Duration}min");
+                    Console.WriteLine("Film:");
+                    Console.WriteLine($"Rezyser: {movie.Director} | Gatunek: {movie.Genre} | Czas trwania: {movie.Duration}min");
                 }
                 else if (item is Magazine)
                 {
                     var magazine = (Magazine)item;
-                    Console.WriteLine("Magazine:");
-                    Console.WriteLine($"Subject: {magazine.Subject}");
+                    Console.WriteLine("Magazyn:");
+                    Console.WriteLine($"Temat: {magazine.Subject}");
                 }
                 else if (item is Book)
                 {
                     var book = (Book)item;
-                    Console.WriteLine("Book:");
-                    Console.WriteLine($"Genre: {book.Genre}");
+                    Console.WriteLine("Ksiazka:");
+                    Console.WriteLine($"Gatunek: {book.Genre}");
                 }
                 else if (item is ScientificPaper)
                 {
                     var scientificPaper = (ScientificPaper)item;
-                    Console.WriteLine("ScientificPaper:");
-                    Console.WriteLine($"ScienceField: {scientificPaper.ScienceField} | Journal: {scientificPaper.Journal}");
+                    Console.WriteLine("Praca naukowa:");
+                    Console.WriteLine($"Dziedzina: {scientificPaper.ScienceField} | Publikacja: {scientificPaper.Journal}");
                 }
-                Console.WriteLine($"ID: {item.Id} | Name: {item.Name} | Available: {!item.IsRented} | Rented By (ID): {item.RentedById} | BarCode: {item.BarCode}");
+                Console.WriteLine($"ID: {item.Id} | Nazwa: {item.Name} | Dostepnosc: {!item.IsRented} | Wypozyczone przez (ID): {item.RentedById} | Kod Kreskowy: {item.BarCode}");
                 Console.WriteLine("--------------------------------------------------------------------");
             }
         }
@@ -134,8 +116,8 @@ namespace LibraryOP
         {
             foreach (var user in Users)
             {
-                Console.WriteLine($"ID: {user.Id} | Name: {user.Name} | Email: {user.Email}");
-                Console.WriteLine($"Address: {user.Address}");
+                Console.WriteLine($"ID: {user.Id} | Imie: {user.Name} | Email: {user.Email}");
+                Console.WriteLine($"Adres: {user.Address}");
                 Console.WriteLine("------------------------------");
             }
         }

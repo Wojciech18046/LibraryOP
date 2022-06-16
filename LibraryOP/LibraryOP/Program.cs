@@ -15,10 +15,10 @@ namespace LibraryOP
             Graphic();
             Console.WriteLine("Naciśnij dowolny klawisz, aby kontynuować.");
             Console.ReadKey();
+            Library library = new Library();
             string choice = "0";
             while (choice != "9")
-            {
-                Library library = new Library();
+            {                
                 MenuOptions();
                 choice = Console.ReadLine();
                 switch (choice)
@@ -230,7 +230,6 @@ namespace LibraryOP
             }
             Console.WriteLine("Proszę wprowadzić autora.");
             string autor = Console.ReadLine();
-            Console.WriteLine("Proszę wprowadzić kod kreskowy.");
             Book book = new Book(barCode, name, genre, count, autor);
             library.AddItem(book);
             Console.WriteLine("Operacja zakończyła się powodzeniem.");

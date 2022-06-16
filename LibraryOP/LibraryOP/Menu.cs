@@ -54,8 +54,8 @@ namespace LibraryOP
                         break;
                 }
                 Console.WriteLine();
-                Console.WriteLine("Naciśnij Enter, aby kontynuować.");
-                Console.ReadLine();
+                Console.WriteLine("Naciśnij dowolny klawisz, aby kontynuować.");
+                Console.ReadKey();
             }
         }
 
@@ -128,43 +128,27 @@ namespace LibraryOP
 
         private static void MenuRemoveItem(ILibrary library)
         {
-            if (int.TryParse(Console.ReadLine(), out int id))
-            {
-                library.RemoveItem(id);
-                Console.WriteLine("Operacja zakończyła się powodzeniem.");
-            }
-            else
-            {
-                Console.WriteLine("Wprowadzona wartoiść nie jest numerem ID.");
-            }
+            Console.WriteLine("Proszę wprowadzić numer ID przedmiotu, który chcesz usunąć.");
+            int id = ReadInt();
+            library.RemoveItem(id);
+            Console.WriteLine("Operacja zakończyła się powodzeniem.");
         }
 
         private static void MenuRentItem(ILibrary library)
         {
-            Console.WriteLine("Proszę wprowadzić numer ID przedmiotu, następnie numer ID użytkownika.");
-            if (int.TryParse(Console.ReadLine(), out int id) && int.TryParse(Console.ReadLine(), out int userid))
-            {
-                library.RentItem(id, userid);
-                Console.WriteLine("Operacja zakończyła się powodzeniem.");
-            }
-            else
-            {
-                Console.WriteLine("Wprowadzona wartoiść nie jest numerem ID.");
-            }
+            Console.WriteLine("Proszę wprowadzić kood kreskowy przedmiotu, następnie numer ID użytkownika.");
+            int id = ReadInt();
+            int userid = ReadInt();
+            library.RentItem(id, userid);
+            Console.WriteLine("Operacja zakończyła się powodzeniem.");
         }
 
         private static void MenuReturnItem(ILibrary library)
         {
             Console.WriteLine("Proszę wprowadzić numer ID przedmiotu, który chcesz oddać.");
-            if (int.TryParse(Console.ReadLine(), out int id))
-            {
-                library.ReturnItem(id);
-                Console.WriteLine("Operacja zakończyła się powodzeniem.");
-            }
-            else
-            {
-                Console.WriteLine("Wprowadzona wartoiść nie jest numerem ID.");
-            }
+            int id = ReadInt();
+            library.ReturnItem(id);
+            Console.WriteLine("Operacja zakończyła się powodzeniem.");
         }
 
         private static void MenuListItems(ILibrary library)
@@ -177,11 +161,11 @@ namespace LibraryOP
         static void MenuAddUser(ILibrary library)
         {
             Console.WriteLine("Wprowadź nazwę użytkownika.");
-            string name = Console.ReadLine();
+            string name = ReadString();
             Console.WriteLine("Wprowadź adres email.");
-            string email = Console.ReadLine();
+            string email = ReadString();
             Console.WriteLine("Wprowadź adres użytkownika.");
-            string adres = Console.ReadLine();
+            string adres = ReadString();
             int id = IdGenerator.GenerateId(library.Users.Select(i => i.Id).ToList());
             User user = new User(id, name, email, adres);
             library.AddUser(user);
@@ -191,15 +175,9 @@ namespace LibraryOP
         private static void MenuRemoveUser(ILibrary library)
         {
             Console.WriteLine("Proszę wprowadzić numer ID użytkownika, którego chcesz usunąć.");
-            if (int.TryParse(Console.ReadLine(), out int id))
-            {
-                library.RemoveUser(id);
-                Console.WriteLine("Operacja zakończyła się powodzeniem.");
-            }
-            else
-            {
-                Console.WriteLine("Wprowadzona wartoiść nie jest numerem ID.");
-            }
+            int id = ReadInt();
+            library.RemoveUser(id);
+            Console.WriteLine("Operacja zakończyła się powodzeniem.");
         }
 
         private static void MenuListUsers(ILibrary library)
@@ -211,32 +189,16 @@ namespace LibraryOP
 
         private static void MenuAddBook(ILibrary library)
         {
-            int barCode = 0;
             Console.WriteLine("Proszę wprowadzić kod kreskowy.");
-            while (barCode == 0)
-            {
-                int.TryParse(Console.ReadLine(), out barCode);
-                if (barCode == 0)
-                {
-                    Console.WriteLine("Wprowadzona wartość nie jest numerem kodu kreskowego. \n" + "Spróbuj ponownie.");
-                }
-            }
+            int barCode = ReadInt();
             Console.WriteLine("Proszę wprowadzić nazwę.");
-            string name = Console.ReadLine();
+            string name = ReadString();
             Console.WriteLine("Proszę wprowadzić gatunek.");
-            string genre = Console.ReadLine();
-            int count = 0;
-            Console.WriteLine("Proszę wprowadzić ilość stron.");
-            while (count == 0)
-            {
-                int.TryParse(Console.ReadLine(), out count);
-                if (count == 0)
-                {
-                    Console.WriteLine("Wprowadzona wartość nie jest numerem stron. \n" + "Spróbuj ponownie.");
-                }
-            }
+            string genre = ReadString();
+            Console.WriteLine("Proszę wprowadzić ilość stron.");            
+            int count = ReadInt();
             Console.WriteLine("Proszę wprowadzić autora.");
-            string autor = Console.ReadLine();
+            string autor = ReadString();
             int id = IdGenerator.GenerateId(library.Items.Select(i => i.Id).ToList());
             Book book = new Book(id, barCode, name, genre, count, autor);
             library.AddItem(book);
@@ -245,32 +207,16 @@ namespace LibraryOP
 
         private static void MenuAddMagazine(ILibrary library)
         {
-            int barCode = 0;
             Console.WriteLine("Proszę wprowadzić kod kreskowy.");
-            while (barCode == 0)
-            {
-                int.TryParse(Console.ReadLine(), out barCode);
-                if (barCode == 0)
-                {
-                    Console.WriteLine("Wprowadzona wartość nie jest numerem kodu kreskowego. \n" + "Spróbuj ponownie.");
-                }
-            }
+            int barCode = ReadInt();            
             Console.WriteLine("Proszę wprowadzić nazwę.");
-            string name = Console.ReadLine();
+            string name = ReadString();
             Console.WriteLine("Proszę wprowadzić temat.");
-            string subject = Console.ReadLine();
-            int count = 0;
+            string subject = ReadString();
             Console.WriteLine("Proszę wprowadzić ilość stron.");
-            while (count == 0)
-            {
-                int.TryParse(Console.ReadLine(), out count);
-                if (count == 0)
-                {
-                    Console.WriteLine("Wprowadzona wartość nie jest numerem stron. \n" + "Spróbuj ponownie.");
-                }
-            }
+            int count = ReadInt();            
             Console.WriteLine("Proszę wprowadzić autora.");
-            string autor = Console.ReadLine();
+            string autor = ReadString();
             int id = IdGenerator.GenerateId(library.Items.Select(i => i.Id).ToList());
             Magazine magazine = new Magazine(id, barCode, name, subject, count, autor);
             library.AddItem(magazine);
@@ -279,32 +225,16 @@ namespace LibraryOP
 
         private static void MenuAddMovie(ILibrary library)
         {
-            int barCode = 0;
             Console.WriteLine("Proszę wprowadzić kod kreskowy.");
-            while (barCode == 0)
-            {
-                int.TryParse(Console.ReadLine(), out barCode);
-                if (barCode == 0)
-                {
-                    Console.WriteLine("Wprowadzona wartość nie jest numerem kodu kreskowego. \n" + "Spróbuj ponownie.");
-                }
-            }
+            int barCode = ReadInt();
             Console.WriteLine("Proszę wprowadzić nazwę.");
-            string name = Console.ReadLine();
+            string name = ReadString();
             Console.WriteLine("Proszę wprowadzić gatunek.");
-            string genre = Console.ReadLine();
-            int duration = 0;
+            string genre = ReadString();
             Console.WriteLine("Proszę wprowadzić czas trwania.");
-            while (duration == 0)
-            {
-                int.TryParse(Console.ReadLine(), out duration);
-                if (duration == 0)
-                {
-                    Console.WriteLine("Wprowadzona wartość nie jest czasem trwania filmu. \n" + "Spróbuj ponownie.");
-                }
-            }
+            int duration = ReadInt();
             Console.WriteLine("Proszę wprowadzić reżysera.");
-            string director = Console.ReadLine();
+            string director = ReadString();
             int id = IdGenerator.GenerateId(library.Items.Select(i => i.Id).ToList());
             Movie movie = new Movie(id,barCode, name, genre, duration, director);
             library.AddItem(movie);
@@ -313,34 +243,18 @@ namespace LibraryOP
 
         private static void MenuAddScientificPaper(ILibrary library)
         {
-            int barCode = 0;
             Console.WriteLine("Proszę wprowadzić kod kreskowy.");
-            while (barCode == 0)
-            {
-                int.TryParse(Console.ReadLine(), out barCode);
-                if (barCode == 0)
-                {
-                    Console.WriteLine("Wprowadzona wartość nie jest numerem kodu kreskowego. \n" + "Spróbuj ponownie.");
-                }
-            }
+            int barCode = ReadInt();
             Console.WriteLine("Proszę wprowadzić nazwę.");
-            string name = Console.ReadLine();
+            string name = ReadString();
             Console.WriteLine("Proszę wprowadzić dziedzinę naukową.");
-            string scienceField = Console.ReadLine();
+            string scienceField = ReadString();
             Console.WriteLine("Proszę wprowadzić publikacje.");
-            string journal = Console.ReadLine();
-            int count = 0;
+            string journal = ReadString();
             Console.WriteLine("Proszę wprowadzić ilość stron.");
-            while (count == 0)
-            {
-                int.TryParse(Console.ReadLine(), out count);
-                if (count == 0)
-                {
-                    Console.WriteLine("Wprowadzona wartość nie jest numerem stron. \n" + "Spróbuj ponownie.");
-                }
-            }
+            int count = ReadInt();
             Console.WriteLine("Proszę wprowadzić autora.");
-            string autor = Console.ReadLine();
+            string autor = ReadString();
             int id = IdGenerator.GenerateId(library.Items.Select(i => i.Id).ToList());
             ScientificPaper scientificPaper = new ScientificPaper(id, barCode, name, scienceField, journal, count, autor);
             library.AddItem(scientificPaper);
@@ -351,6 +265,34 @@ namespace LibraryOP
         {
             library.SaveDb();
             Console.WriteLine("Operacja zakończyła się powodzeniem.");
+        }
+
+        private static string ReadString()
+        {
+            string readText = "";
+            while (readText == "")
+            {
+                readText = Console.ReadLine();
+                if (readText == "")
+                {
+                    Console.WriteLine("Wprowadzona wartość jest nieprawidłowa. \n" + "Spróbuj ponownie.");
+                }
+            }
+            return readText;
+        }
+
+        private static int ReadInt()
+        {
+            int readInt = 0;
+            while (readInt == 0)
+            {
+                int.TryParse(Console.ReadLine(), out readInt);
+                if (readInt == 0)
+                {
+                    Console.WriteLine("Wprowadzona wartość nie jest numerem. \n" + "Spróbuj ponownie.");
+                }
+            }
+            return readInt;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace LibraryOP
@@ -12,8 +13,8 @@ namespace LibraryOP
             Graphic();
             Console.WriteLine("Naciśnij dowolny klawisz, aby kontynuować.");
             Console.ReadKey();
-            string choice = "0";
-            while (choice != "9")
+            string choice = String.Empty;
+            while (choice != "0")
             {
                 MenuOptions();
                 choice = Console.ReadLine();
@@ -46,10 +47,10 @@ namespace LibraryOP
                     case "9":
                         MenuSaveDB(library);
                         break;
-                    case "10:":
+                    case "0":
                         Console.WriteLine("Dziękujemy za skorzystanie z naszego programu.");
+                        MenuSaveDB(library);
                         break;
-
                     default:
                         Console.WriteLine("Proszę wybrać którąś z opcji podanych w menu.");
                         break;
@@ -57,10 +58,9 @@ namespace LibraryOP
                 Console.WriteLine();
                 Console.WriteLine("Naciśnij Enter, aby kontynuować..........");
                 Console.ReadLine();
-
             }
-
         }
+
         private static void MenuOptions()
         {
             Console.Clear();
@@ -74,7 +74,6 @@ namespace LibraryOP
             Console.WriteLine("7. Usuń użytkownika.");
             Console.WriteLine("8. Wyświetl listę użytkowników.");
             Console.WriteLine("9. Wyjdź z programu.");
-
         }
 
         private static void Graphic()
@@ -99,6 +98,7 @@ namespace LibraryOP
                               "|~~|===|--|===|~|~~|%%|~5~|--|:::|=|~|----|==|---|=|\n" +
                               "----------------------------------------------------");
         }
+
         private static void MenuAddItem(ILibrary library)
         {
             Console.WriteLine("1. Dodaj książkę.");
@@ -126,6 +126,7 @@ namespace LibraryOP
                     break;
             }
         }
+
         private static void MenuRemoveItem(ILibrary library)
         {
             if (int.TryParse(Console.ReadLine(), out int id))
@@ -138,6 +139,7 @@ namespace LibraryOP
                 Console.WriteLine("Wprowadzona wartoiść nie jest numerem ID.");
             }
         }
+
         private static void MenuRentItem(ILibrary library)
         {
             Console.WriteLine("Proszę wprowadzić numer ID przedmiotu, następnie numer ID użytkownika.");
@@ -151,6 +153,7 @@ namespace LibraryOP
                 Console.WriteLine("Wprowadzona wartoiść nie jest numerem ID.");
             }
         }
+
         private static void MenuReturnItem(ILibrary library)
         {
             Console.WriteLine("Proszę wprowadzić numer ID przedmiotu, który chcesz oddać.");
@@ -164,12 +167,14 @@ namespace LibraryOP
                 Console.WriteLine("Wprowadzona wartoiść nie jest numerem ID.");
             }
         }
+
         private static void MenuListItems(ILibrary library)
         {
             Console.WriteLine("Lista wszystkich przedmiotów.");
             library.ListItems();
             Console.WriteLine("Operacja zakończyła się powodzeniem.");
         }
+
         static void MenuAddUser(ILibrary library)
         {
             Console.WriteLine("Wprowadź nazwę użytkownika.");
@@ -178,10 +183,12 @@ namespace LibraryOP
             string email = Console.ReadLine();
             Console.WriteLine("Wprowadź adres użytkownika.");
             string adres = Console.ReadLine();
-            User user = new User(name, email, adres);
+            int id = IdGenerator.GenerateId(library.Users.Select(i => i.Id).ToList());
+            User user = new User(id, name, email, adres);
             library.AddUser(user);
             Console.WriteLine("Operacja zakończyła się powodzeniem.");
         }
+
         private static void MenuRemoveUser(ILibrary library)
         {
             Console.WriteLine("Proszę wprowadzić numer ID użytkownika, którego chcesz usunąć.");
@@ -195,12 +202,14 @@ namespace LibraryOP
                 Console.WriteLine("Wprowadzona wartoiść nie jest numerem ID.");
             }
         }
+
         private static void MenuListUsers(ILibrary library)
         {
             Console.WriteLine("Lista wszystkich użytkowników.");
             library.ListUsers();
             Console.WriteLine("Operacja zakończyła się powodzeniem.");
         }
+
         private static void MenuAddBook(ILibrary library)
         {
             int barCode = 0;
@@ -229,10 +238,12 @@ namespace LibraryOP
             }
             Console.WriteLine("Proszę wprowadzić autora.");
             string autor = Console.ReadLine();
-            Book book = new Book(barCode, name, genre, count, autor);
+            int id = IdGenerator.GenerateId(library.Items.Select(i => i.Id).ToList());
+            Book book = new Book(id, barCode, name, genre, count, autor);
             library.AddItem(book);
             Console.WriteLine("Operacja zakończyła się powodzeniem.");
         }
+
         private static void MenuAddMagazine(ILibrary library)
         {
             int barCode = 0;
@@ -261,10 +272,12 @@ namespace LibraryOP
             }
             Console.WriteLine("Proszę wprowadzić autora.");
             string autor = Console.ReadLine();
-            Magazine magazine = new Magazine(barCode, name, subject, count, autor);
+            int id = IdGenerator.GenerateId(library.Items.Select(i => i.Id).ToList());
+            Magazine magazine = new Magazine(id, barCode, name, subject, count, autor);
             library.AddItem(magazine);
             Console.WriteLine("Operacja zakończyła się powodzeniem.");
         }
+
         private static void MenuAddMovie(ILibrary library)
         {
             int barCode = 0;
@@ -293,10 +306,12 @@ namespace LibraryOP
             }
             Console.WriteLine("Proszę wprowadzić reżysera.");
             string director = Console.ReadLine();
-            Movie movie = new Movie(barCode, name, genre, duration, director);
+            int id = IdGenerator.GenerateId(library.Items.Select(i => i.Id).ToList());
+            Movie movie = new Movie(id,barCode, name, genre, duration, director);
             library.AddItem(movie);
             Console.WriteLine("Operacja zakończyła się powodzeniem.");
         }
+
         private static void MenuAddScientificPaper(ILibrary library)
         {
             int barCode = 0;
@@ -327,16 +342,16 @@ namespace LibraryOP
             }
             Console.WriteLine("Proszę wprowadzić autora.");
             string autor = Console.ReadLine();
-            ScientificPaper scientificPaper = new ScientificPaper(barCode, name, scienceField, journal, count, autor);
+            int id = IdGenerator.GenerateId(library.Items.Select(i => i.Id).ToList());
+            ScientificPaper scientificPaper = new ScientificPaper(id, barCode, name, scienceField, journal, count, autor);
             library.AddItem(scientificPaper);
             Console.WriteLine("Operacja zakończyła się powodzeniem.");
         }
+
         private static void MenuSaveDB(ILibrary library)
         {
             library.SaveDb();
             Console.WriteLine("Operacja zakończyła się powodzeniem.");
         }
-
-
     }
 }

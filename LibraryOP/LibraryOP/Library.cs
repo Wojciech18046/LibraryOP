@@ -10,6 +10,18 @@ namespace LibraryOP
         public List<User> Users { get; set; }
         public List<LibraryItem> Items { get; set; }
 
+        public Library()
+        {
+            Users = new List<User>();
+            Items = new List<LibraryItem>();
+
+            Users.AddRange(DBHandler.ReadDb<User>());
+            Items.AddRange(DBHandler.ReadDb<Book>());
+            Items.AddRange(DBHandler.ReadDb<Movie>());
+            Items.AddRange(DBHandler.ReadDb<Magazine>());
+            Items.AddRange(DBHandler.ReadDb<ScientificPaper>());
+        }
+
         public void AddItem(LibraryItem item)
         {
             this.Items.Add(item);

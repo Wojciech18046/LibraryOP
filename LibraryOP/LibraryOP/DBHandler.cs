@@ -13,7 +13,7 @@ namespace LibraryOP
         private const string _userDBName = "Users.json";
 
         public static List<T> ReadDb<T>()
-            where T : LibraryItem, new()
+            where T : ILibraryObject
         {
             var list = new List<T>();
 

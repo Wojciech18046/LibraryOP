@@ -334,6 +334,7 @@ namespace LibraryOP
         private static void MenuSaveDB(ILibrary library)
         {
             library.SaveDb();
+            Console.WriteLine("Operacja zakończyła się powodzeniem.");
         }
 
 

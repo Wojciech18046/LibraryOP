@@ -6,7 +6,7 @@ using System.Text;
 namespace LibraryOP
 {
     public class Library : ILibrary
-    { 
+    {
         public List<User> Users { get; set; }
         public List<LibraryItem> Items { get; set; }
 
@@ -23,66 +23,74 @@ namespace LibraryOP
             }
             else
             {
-                //TODO: throw exception #1
+                throw new InvalidOperationException("Nieprawidlowy ID lub ta pozycja nie istnieje...");
             }
         }
-        public void RentItem(int id, int userid)
+        public void RentItem(int barCode, int userid)//added check for user existing
         {
-            var item = this.Items.FirstOrDefault(x => x.Id == id);
-            if (item != null)
+            var user = this.Users.SingleOrDefault(y => y.Id == userid);
+
+            if (user == null)
             {
-                item.RentedById = userid;
-                item.IsRented = true;
+                throw new InvalidOperationException("Użytkownik nie istnieje w bazie danych.");
+            }
+
+            var itemsToRent = Items.Where(i => i.BarCode == barCode && i.IsRented == false && i.RentedById == null);
+
+            if (itemsToRent.Any())
+            {
+                var rentItem = itemsToRent.First();
+                rentItem.RentedById = userid;
+                rentItem.IsRented = true;
             }
             else
             {
-                //TODO: throw exception #2
+                throw new InvalidOperationException("Brak wolnych egzemplarzy lub książka nie istnieje w bazie danych.");
             }
         }
         public void ReturnItem(int id)
         {
-            var item=Items.FirstOrDefault(x => x.Id == id);
-            if (item != null)
+            var item = Items.FirstOrDefault(x => x.Id == id);
+            if (item != null && item.IsRented == true)//lite security that its not misstake
             {
                 item.RentedById = null;
                 item.IsRented = false;
             }
             else
             {
-                //TODO: throw exception #3
+                throw new InvalidOperationException("Nieprawidlowy ID lub ta pozycja nie istnieje...");
             }
         }
         public void ListItems()
         {
-            foreach(var item in Items)
+            foreach (var item in Items.OrderBy(x => x.GetType()))
             {
-            
-                if(item is Movie)
+                if (item is Movie)
                 {
                     var movie = (Movie)item;
-                    Console.WriteLine("Movie:");
-                    Console.WriteLine($"Director: {movie.Director} | Genre: {movie.Genre} | Duration: {movie.Duration}min");
+                    Console.WriteLine("Film:");
+                    Console.WriteLine($"Rezyser: {movie.Director} | Gatunek: {movie.Genre} | Czas trwania: {movie.Duration}min");
                 }
-                else if(item is Magazine)
+                else if (item is Magazine)
                 {
                     var magazine = (Magazine)item;
-                    Console.WriteLine("Magazine:");
-                    Console.WriteLine($"Subject: {magazine.Subject}");
+                    Console.WriteLine("Magazyn:");
+                    Console.WriteLine($"Temat: {magazine.Subject}");
                 }
-                else if(item is Book)
+                else if (item is Book)
                 {
                     var book = (Book)item;
-                    Console.WriteLine("Book:");
-                    Console.WriteLine($"Genre: {book.Genre}");
+                    Console.WriteLine("Ksiazka:");
+                    Console.WriteLine($"Gatunek: {book.Genre}");
                 }
-                else if(item is ScientificPaper)
+                else if (item is ScientificPaper)
                 {
                     var scientificPaper = (ScientificPaper)item;
-                    Console.WriteLine("ScientificPaper:");
-                    Console.WriteLine($"ScienceField: {scientificPaper.ScienceField} | Journal: {scientificPaper.Journal}");
+                    Console.WriteLine("Praca naukowa:");
+                    Console.WriteLine($"Dziedzina: {scientificPaper.ScienceField} | Publikacja: {scientificPaper.Journal}");
                 }
-            Console.WriteLine($"ID: {item.Id} | Name: {item.Name} | Available: {!item.IsRented} | Rented By (ID): {item.RentedById} | BarCode: {item.BarCode}");
-            Console.WriteLine("--------------------------------------------------------------------");
+                Console.WriteLine($"ID: {item.Id} | Nazwa: {item.Name} | Dostepnosc: {!item.IsRented} | Wypozyczone przez (ID): {item.RentedById} | Kod Kreskowy: {item.BarCode}");
+                Console.WriteLine("--------------------------------------------------------------------");
             }
         }
         public void AddUser(User user)
@@ -99,15 +107,15 @@ namespace LibraryOP
             }
             else
             {
-                //TODO: throw exception #3
+                throw new InvalidOperationException("Nieprawidlowy ID lub ten uzytkownik nie istnieje...");
             }
         }
         public void ListUsers()
         {
-            foreach(var user in Users)
+            foreach (var user in Users)
             {
-                Console.WriteLine($"ID: {user.Id} | Name: {user.Name} | Email: {user.Email}");
-                Console.WriteLine($"Address: {user.Address}");
+                Console.WriteLine($"ID: {user.Id} | Imie: {user.Name} | Email: {user.Email}");
+                Console.WriteLine($"Adres: {user.Address}");
                 Console.WriteLine("------------------------------");
             }
         }

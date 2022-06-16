@@ -5,7 +5,7 @@ using System.Text.Json;
 
 namespace LibraryOP
 {
-    internal class Serializer<T> : ISerializer<T>
+    public class Serializer<T> : ISerializer<T>
     {
         public T Deserialize(string content)
         {

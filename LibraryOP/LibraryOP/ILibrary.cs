@@ -6,6 +6,8 @@ namespace LibraryOP
 {
     public interface ILibrary
     {
+        public List<User> Users { get; set; }
+        public List<LibraryItem> Items { get; set; }
         public void AddItem(LibraryItem item);
         public void RemoveItem(int id);
         public void RentItem(int id, int userid);

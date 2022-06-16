@@ -12,7 +12,7 @@ namespace LibraryOP
         public string Director { get; }
 
 
-        public Movie(int barCode, string name, string genre, int duration, string director) : base(barCode, name)
+        public Movie(int id, int barCode, string name, string genre, int duration, string director) : base(id, barCode, name)
         {
             Genre = genre;
             Duration = duration;

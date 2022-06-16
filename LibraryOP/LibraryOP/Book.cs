@@ -10,7 +10,7 @@ namespace LibraryOP
         public string Genre { get; }
         public int PageCount { get; }
         public string Author { get; }
-        public Book(int barCode, string name, string genre, int count, string autor) : base(barCode, name)
+        public Book(int id, int barCode, string name, string genre, int count, string autor) : base(id, barCode, name)
         {
             Genre = genre;
             this.PageCount = count;

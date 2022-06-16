@@ -6,11 +6,11 @@ namespace LibraryOP
 {
     public static class DBHandler
     {
-        private const string _bookDBName = "Books.json";
-        private const string _movieDBName = "Movies.json";
-        private const string _magazineDBName = "Magazines.json";
-        private const string _scientificPaperDBName = "ScientificPapers.json";
-        private const string _userDBName = "Users.json";
+        private const string _bookDBName = "../../../Books.json";
+        private const string _movieDBName = "../../../Movies.json";
+        private const string _magazineDBName = "../../../Magazines.json";
+        private const string _scientificPaperDBName = "../../../ScientificPapers.json";
+        private const string _userDBName = "../../../Users.json";
 
         public static List<T> ReadDb<T>()
             where T : ILibraryObject
@@ -45,27 +45,34 @@ namespace LibraryOP
             return list;
         }
 
-        public static void WriteDb<T>(List<T> list)
+        public static void WriteDb<T>(IEnumerable<ILibraryObject> libraryObjectCollection)
         {
             if (typeof(T) == typeof(Book))
             {
-                WriteType(list, _bookDBName);
+                var list = new List<Book>();
+
+                foreach (var libraryObject in libraryObjectCollection)
+                {
+                    list.Add((Book)(LibraryItem)libraryObject);
+                }
+
+                WriteType<Book>(list, _bookDBName);
             }
             else if (typeof(T) == typeof(Movie))
             {
-                WriteType(list, _movieDBName);
+                //WriteType<Movie>(RewriteCollectionAsList<Movie>(libraryObjectCollection), _movieDBName);
             }
             else if (typeof(T) == typeof(Magazine))
             {
-                WriteType(list, _magazineDBName);
+                //WriteType<Magazine>(RewriteCollectionAsList<Magazine>(libraryObjectCollection), _magazineDBName);
             }
             else if (typeof(T) == typeof(ScientificPaper))
             {
-                WriteType(list, _scientificPaperDBName);
+                //WriteType<ScientificPaper>(RewriteCollectionAsList<ScientificPaper>(libraryObjectCollection), _scientificPaperDBName);
             }
             else if (typeof(T) == typeof(User))
             {
-                WriteType(list, _userDBName);
+                //WriteType<User>(RewriteCollectionAsList<User>(libraryObjectCollection), _userDBName);
             }
             else
             {
@@ -81,7 +88,10 @@ namespace LibraryOP
             {
                 foreach (var item in streamReader.ReadToEnd().Split(';'))
                 {
-                    list.Add(serializer.Deserialize(item));
+                    if (!String.IsNullOrWhiteSpace(item))
+                    {
+                        list.Add(serializer.Deserialize(item));
+                    }
                 }
             }
         }
@@ -90,7 +100,7 @@ namespace LibraryOP
         {
             var serializer = new Serializer<T>();
 
-            using (var streamWriter = new StreamWriter(new FileStream(_bookDBName, FileMode.OpenOrCreate)))
+            using (var streamWriter = new StreamWriter(path))
             {
                 foreach (var item in list)
                 {
@@ -98,6 +108,7 @@ namespace LibraryOP
                     streamWriter.Write(';');
                     streamWriter.Write(Environment.NewLine);
                 }
+                streamWriter.Flush();
             }
         }
     }

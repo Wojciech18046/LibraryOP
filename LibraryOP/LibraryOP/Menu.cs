@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace LibraryOP
 {
@@ -56,7 +54,7 @@ namespace LibraryOP
                         break;
                 }
                 Console.WriteLine();
-                Console.WriteLine("Naciśnij Enter, aby kontynuować..........");
+                Console.WriteLine("Naciśnij Enter, aby kontynuować.");
                 Console.ReadLine();
             }
         }
@@ -73,7 +71,8 @@ namespace LibraryOP
             Console.WriteLine("6. Dodaj użytkownika.");
             Console.WriteLine("7. Usuń użytkownika.");
             Console.WriteLine("8. Wyświetl listę użytkowników.");
-            Console.WriteLine("9. Wyjdź z programu.");
+            Console.WriteLine("9. Zapisz zmiany do bazy.");
+            Console.WriteLine("0. Wyjdź z programu.");
         }
 
         private static void Graphic()

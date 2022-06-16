@@ -6,4 +6,8 @@
 /LibraryOP/LibraryOP/bin/*
 /LibraryOP/LibraryOP/.vs/*
 /LibraryOP/.vs/*
-
+/LibraryOP/LibraryOP/Books.json
+/LibraryOP/LibraryOP/Movies.json
+/LibraryOP/LibraryOP/Magazines.json
+/LibraryOP/LibraryOP/ScientificPapers.json
+/LibraryOP/LibraryOP/Users.json

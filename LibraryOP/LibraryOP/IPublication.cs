@@ -1,8 +1,8 @@
 ﻿namespace LibraryOP
 {
-    public interface IPublication
+    public interface IPublication : ILibraryObject
     {
-        public int PageCount { get; } 
-        public string Author { get; }
+        public int PageCount { get; set; } 
+        public string Author { get; set; }
     }
 }

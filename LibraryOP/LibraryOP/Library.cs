@@ -92,18 +92,24 @@ namespace LibraryOP
                     var magazine = (Magazine)item;
                     Console.WriteLine("Magazyn:");
                     Console.WriteLine($"Temat: {magazine.Subject}");
+                    Console.WriteLine($"Autor: {magazine.Author}");
+                    Console.WriteLine($"Liczba stron: {magazine.PageCount}");
                 }
                 else if (item is Book)
                 {
                     var book = (Book)item;
                     Console.WriteLine("Ksiazka:");
+                    Console.WriteLine($"Autor: {book.Author}");
                     Console.WriteLine($"Gatunek: {book.Genre}");
+                    Console.WriteLine($"Liczba stron: {book.PageCount}");
                 }
                 else if (item is ScientificPaper)
                 {
                     var scientificPaper = (ScientificPaper)item;
                     Console.WriteLine("Praca naukowa:");
+                    Console.WriteLine($"Autor: {scientificPaper.Author}");
                     Console.WriteLine($"Dziedzina: {scientificPaper.ScienceField} | Publikacja: {scientificPaper.Journal}");
+                    Console.WriteLine($"Liczba stron: {scientificPaper.PageCount}");
                 }
                 Console.WriteLine($"ID: {item.Id} | Nazwa: {item.Name} | Dostepnosc: {!item.IsRented} | Wypozyczone przez (ID): {item.RentedById} | Kod Kreskowy: {item.BarCode}");
                 Console.WriteLine("--------------------------------------------------------------------");
@@ -141,11 +147,11 @@ namespace LibraryOP
 
         public void SaveDb()
         {
-            DBHandler.WriteDb((List<Book>)Items.Where(x => x.GetType() == typeof(Book)));
-            DBHandler.WriteDb((List<Movie>)Items.Where(x => x.GetType() == typeof(Movie)));
-            DBHandler.WriteDb((List<Magazine>)Items.Where(x => x.GetType() == typeof(Magazine)));
-            DBHandler.WriteDb((List<ScientificPaper>)Items.Where(x => x.GetType() == typeof(ScientificPaper)));
-            DBHandler.WriteDb((List<User>)Items.Where(x => x.GetType() == typeof(User)));
+            DBHandler.WriteDb<Book>(Items.Where(x => x.GetType() == typeof(Book)));
+            DBHandler.WriteDb<Movie>(Items.Where(x => x.GetType() == typeof(Movie)));
+            DBHandler.WriteDb<Magazine>(Items.Where(x => x.GetType() == typeof(Magazine)));
+            DBHandler.WriteDb<ScientificPaper>(Items.Where(x => x.GetType() == typeof(ScientificPaper)));
+            DBHandler.WriteDb<User>(Users.Where(x => x.GetType() == typeof(User)));
         }
     }
 }

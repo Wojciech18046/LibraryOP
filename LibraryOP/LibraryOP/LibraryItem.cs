@@ -9,6 +9,8 @@ namespace LibraryOP
         public string Name { get; set; }
         public bool IsRented { get; set; }
         public int? RentedById { get; set; }
+
+        public LibraryItem() { }
         public LibraryItem(int id, int barCode, string name)
         {
             this.Id = id;

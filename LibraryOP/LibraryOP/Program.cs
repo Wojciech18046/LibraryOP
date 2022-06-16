@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace LibraryOP
+﻿namespace LibraryOP
 {
     internal class Program
     {
@@ -9,7 +7,5 @@ namespace LibraryOP
             Library library = new Library();
             Menu.RunMenu(library);
         }
-
-
     }
 }

@@ -11,7 +11,7 @@ namespace LibraryOP
         public int Duration { get; }
         public string Director { get; }
 
-
+        public Movie() { }
         public Movie(int id, int barCode, string name, string genre, int duration, string director) : base(id, barCode, name)
         {
             Genre = genre;

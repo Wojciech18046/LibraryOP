@@ -5,7 +5,7 @@ using System.Text;
 
 namespace LibraryOP
 {
-    public class Library
+    public class Library : ILibrary
     { 
         public List<User> Users { get; set; }
         public List<LibraryItem> Items { get; set; }

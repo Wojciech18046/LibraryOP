@@ -14,6 +14,7 @@ namespace LibraryOP
         {
             this.Items.Add(item);
         }
+
         public void RemoveItem(int id)
         {
             var item = this.Items.FirstOrDefault(x => x.Id == id);
@@ -26,6 +27,7 @@ namespace LibraryOP
                 throw new InvalidOperationException("Nieprawidlowy ID lub ta pozycja nie istnieje...");
             }
         }
+
         public void RentItem(int barCode, int userid)//added check for user existing
         {
             var user = this.Users.SingleOrDefault(y => y.Id == userid);
@@ -48,6 +50,7 @@ namespace LibraryOP
                 throw new InvalidOperationException("Brak wolnych egzemplarzy lub książka nie istnieje w bazie danych.");
             }
         }
+
         public void ReturnItem(int id)
         {
             var item = Items.FirstOrDefault(x => x.Id == id);
@@ -61,6 +64,7 @@ namespace LibraryOP
                 throw new InvalidOperationException("Nieprawidlowy ID lub ta pozycja nie istnieje...");
             }
         }
+
         public void ListItems()
         {
             foreach (var item in Items.OrderBy(x => x.GetType()))
@@ -93,10 +97,12 @@ namespace LibraryOP
                 Console.WriteLine("--------------------------------------------------------------------");
             }
         }
+
         public void AddUser(User user)
         {
             this.Users.Add(user);
         }
+
         public void RemoveUser(int id)
         {
             var user = this.Users.FirstOrDefault(x => x.Id == id);
@@ -110,6 +116,7 @@ namespace LibraryOP
                 throw new InvalidOperationException("Nieprawidlowy ID lub ten uzytkownik nie istnieje...");
             }
         }
+
         public void ListUsers()
         {
             foreach (var user in Users)

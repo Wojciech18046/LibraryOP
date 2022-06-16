@@ -24,33 +24,34 @@ namespace LibraryOP
             }
             else
             {
-                //TODO: throw exception #1
+                throw new InvalidOperationException("Nieprawidlowy ID lub ta pozycja nie istnieje...");
             }
         }
-        public void RentItem(int id, int userid)
+        public void RentItem(int id, int userid)//added check for user existing
         {
             var item = this.Items.FirstOrDefault(x => x.Id == id);
-            if (item != null)
+            var user = this.Users.FirstOrDefault(y => y.Id == userid);
+            if (item != null && user != null)
             {
                 item.RentedById = userid;
                 item.IsRented = true;
             }
             else
             {
-                //TODO: throw exception #2
+                throw new InvalidOperationException("Nieprawidlowy ID przedmiotu/uzytkownikow lub ta pozycja nie istnieje...");
             }
         }
         public void ReturnItem(int id)
         {
             var item=Items.FirstOrDefault(x => x.Id == id);
-            if (item != null)
+            if (item != null && item.IsRented != false)//lite security that its not misstake
             {
                 item.RentedById = null;
                 item.IsRented = false;
             }
             else
             {
-                //TODO: throw exception #3
+                throw new InvalidOperationException("Nieprawidlowy ID lub ta pozycja nie istnieje...");
             }
         }
         public void ListItems()
@@ -101,7 +102,7 @@ namespace LibraryOP
             }
             else
             {
-                //TODO: throw exception #3
+                throw new InvalidOperationException("Nieprawidlowy ID lub ten uzytkownik nie istnieje...");
             }
         }
         public void ListUsers()

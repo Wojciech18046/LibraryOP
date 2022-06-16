@@ -9,24 +9,25 @@ namespace LibraryOP
     {
         public List<User> Users { get; set; }
         public List<LibraryItem> Items { get; set; }
+
         public void AddItem(LibraryItem item)
         {
             this.Items.Add(item);
-            //TODO: Add save to DB #1
         }
+
         public void RemoveItem(int id)
         {
             var item = this.Items.FirstOrDefault(x => x.Id == id);
             if (item != null)
             {
                 Items.Remove(item);
-                //TODO: Remove from DB #1
             }
             else
             {
                 throw new InvalidOperationException("Nieprawidlowy ID lub ta pozycja nie istnieje...");
             }
         }
+
         public void RentItem(int barCode, int userid)//added check for user existing
         {
             var user = this.Users.SingleOrDefault(y => y.Id == userid);
@@ -49,6 +50,7 @@ namespace LibraryOP
                 throw new InvalidOperationException("Brak wolnych egzemplarzy lub książka nie istnieje w bazie danych.");
             }
         }
+
         public void ReturnItem(int id)
         {
             var item = Items.FirstOrDefault(x => x.Id == id);
@@ -62,6 +64,7 @@ namespace LibraryOP
                 throw new InvalidOperationException("Nieprawidlowy ID lub ta pozycja nie istnieje...");
             }
         }
+
         public void ListItems()
         {
             foreach (var item in Items.OrderBy(x => x.GetType()))
@@ -94,11 +97,12 @@ namespace LibraryOP
                 Console.WriteLine("--------------------------------------------------------------------");
             }
         }
+
         public void AddUser(User user)
         {
             this.Users.Add(user);
-            //TODO: Add save to DB #2
         }
+
         public void RemoveUser(int id)
         {
             var user = this.Users.FirstOrDefault(x => x.Id == id);
@@ -112,6 +116,7 @@ namespace LibraryOP
                 throw new InvalidOperationException("Nieprawidlowy ID lub ten uzytkownik nie istnieje...");
             }
         }
+
         public void ListUsers()
         {
             foreach (var user in Users)
@@ -120,6 +125,15 @@ namespace LibraryOP
                 Console.WriteLine($"Adres: {user.Address}");
                 Console.WriteLine("------------------------------");
             }
+        }
+
+        public void SaveDb()
+        {
+            DBHandler.WriteDb((List<Book>)Items.Where(x => x.GetType() == typeof(Book)));
+            DBHandler.WriteDb((List<Movie>)Items.Where(x => x.GetType() == typeof(Movie)));
+            DBHandler.WriteDb((List<Magazine>)Items.Where(x => x.GetType() == typeof(Magazine)));
+            DBHandler.WriteDb((List<ScientificPaper>)Items.Where(x => x.GetType() == typeof(ScientificPaper)));
+            DBHandler.WriteDb((List<User>)Items.Where(x => x.GetType() == typeof(User)));
         }
     }
 }

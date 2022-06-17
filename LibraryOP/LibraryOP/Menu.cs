@@ -280,11 +280,11 @@ namespace LibraryOP
 
         private static string ReadString()
         {
-            string readText = "";
-            while (readText == "")
+            string readText = "";            
+            while (string.IsNullOrWhiteSpace(readText))
             {
                 readText = Console.ReadLine();
-                if (readText == "")
+                if (string.IsNullOrWhiteSpace(readText))
                 {
                     Console.WriteLine("Wprowadzona wartość jest nieprawidłowa. \n" + "Spróbuj ponownie.");
                 }

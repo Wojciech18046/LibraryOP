@@ -53,26 +53,54 @@ namespace LibraryOP
 
                 foreach (var libraryObject in libraryObjectCollection)
                 {
-                    list.Add((Book)(LibraryItem)libraryObject);
+                    list.Add((Book)libraryObject);
                 }
 
                 WriteType<Book>(list, _bookDBName);
             }
             else if (typeof(T) == typeof(Movie))
             {
-                //WriteType<Movie>(RewriteCollectionAsList<Movie>(libraryObjectCollection), _movieDBName);
+                var list = new List<Movie>();
+
+                foreach (var libraryObject in libraryObjectCollection)
+                {
+                    list.Add((Movie)libraryObject);
+                }
+
+                WriteType<Movie>(list, _bookDBName);
             }
             else if (typeof(T) == typeof(Magazine))
             {
-                //WriteType<Magazine>(RewriteCollectionAsList<Magazine>(libraryObjectCollection), _magazineDBName);
+                var list = new List<Magazine>();
+
+                foreach (var libraryObject in libraryObjectCollection)
+                {
+                    list.Add((Magazine)libraryObject);
+                }
+
+                WriteType<Magazine>(list, _bookDBName);
             }
             else if (typeof(T) == typeof(ScientificPaper))
             {
-                //WriteType<ScientificPaper>(RewriteCollectionAsList<ScientificPaper>(libraryObjectCollection), _scientificPaperDBName);
+                var list = new List<ScientificPaper>();
+
+                foreach (var libraryObject in libraryObjectCollection)
+                {
+                    list.Add((ScientificPaper)libraryObject);
+                }
+
+                WriteType<ScientificPaper>(list, _bookDBName);
             }
             else if (typeof(T) == typeof(User))
             {
-                //WriteType<User>(RewriteCollectionAsList<User>(libraryObjectCollection), _userDBName);
+                var list = new List<User>();
+
+                foreach (var libraryObject in libraryObjectCollection)
+                {
+                    list.Add((User)libraryObject);
+                }
+
+                WriteType<User>(list, _bookDBName);
             }
             else
             {

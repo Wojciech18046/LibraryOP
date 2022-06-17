@@ -60,18 +60,50 @@ namespace LibraryOP
             }
             else if (typeof(T) == typeof(Movie))
             {
+                var list = new List<Movie>();
+
+                foreach (var libraryObject in libraryObjectCollection)
+                {
+                    list.Add((Movie)(LibraryItem)libraryObject);
+                }
+
+                WriteType<Movie>(list, _movieDBName);
                 //WriteType<Movie>(RewriteCollectionAsList<Movie>(libraryObjectCollection), _movieDBName);
             }
             else if (typeof(T) == typeof(Magazine))
             {
+                var list = new List<Magazine>();
+
+                foreach (var libraryObject in libraryObjectCollection)
+                {
+                    list.Add((Magazine)(LibraryItem)libraryObject);
+                }
+
+                WriteType<Magazine>(list, _magazineDBName);
                 //WriteType<Magazine>(RewriteCollectionAsList<Magazine>(libraryObjectCollection), _magazineDBName);
             }
             else if (typeof(T) == typeof(ScientificPaper))
             {
+                var list = new List<ScientificPaper>();
+
+                foreach (var libraryObject in libraryObjectCollection)
+                {
+                    list.Add((ScientificPaper)(LibraryItem)libraryObject);
+                }
+
+                WriteType<ScientificPaper>(list, _scientificPaperDBName);
                 //WriteType<ScientificPaper>(RewriteCollectionAsList<ScientificPaper>(libraryObjectCollection), _scientificPaperDBName);
             }
             else if (typeof(T) == typeof(User))
             {
+                var list = new List<User>();
+
+                foreach (var libraryObject in libraryObjectCollection)
+                {
+                    list.Add((User)(User)libraryObject);
+                }
+
+                WriteType<User>(list, _userDBName);
                 //WriteType<User>(RewriteCollectionAsList<User>(libraryObjectCollection), _userDBName);
             }
             else

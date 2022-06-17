@@ -299,15 +299,15 @@ namespace LibraryOP
         private static string ReadString()
         {
             string readText = String.Empty;            
-            while (string.IsNullOrWhiteSpace(readText))
+            while (string.IsNullOrEmpty(readText))
             {
                 readText = Console.ReadLine();
+                readText = readText.Trim();
                 if (string.IsNullOrWhiteSpace(readText))
                 {
                     Console.WriteLine("Wprowadzona wartość jest nieprawidłowa. \n" + "Spróbuj ponownie.");
                 }
             }
-            readText = readText.Trim();
             return readText;
         }
 

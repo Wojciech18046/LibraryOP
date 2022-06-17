@@ -79,7 +79,7 @@ namespace LibraryOP
 
         public void ListItems()
         {
-            foreach (var item in Items.OrderBy(x => x.GetType()))
+            foreach (var item in Items)//.OrderBy(x => x.GetType()))
             {
                 if (item is Movie)
                 {

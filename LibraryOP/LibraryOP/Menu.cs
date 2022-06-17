@@ -158,8 +158,9 @@ namespace LibraryOP
         private static void MenuRentItem(ILibrary library)
         {
             Console.Clear();
-            Console.WriteLine("Proszę wprowadzić kood kreskowy przedmiotu, następnie numer ID użytkownika.");
+            Console.WriteLine("Proszę wprowadzić kood kreskowy przedmiotu.");
             int id = ReadInt();
+            Console.WriteLine("Proszę wprowadzić numer Id użytkownika.");
             int userid = ReadInt();
             library.RentItem(id, userid);
             Console.WriteLine("Operacja zakończyła się powodzeniem.");
@@ -186,11 +187,11 @@ namespace LibraryOP
         static void MenuAddUser(ILibrary library)
         {
             Console.Clear();
-            Console.WriteLine("Wprowadź nazwę użytkownika.");
+            Console.WriteLine("Proszę wprowadzić nazwę użytkownika.");
             string name = ReadString();
-            Console.WriteLine("Wprowadź adres email.");
+            Console.WriteLine("Proszę wprowadź adres email użytkownika.");
             string email = ReadString();
-            Console.WriteLine("Wprowadź adres użytkownika.");
+            Console.WriteLine("Proszę wprowadzić adres zamieszkania użytkownika.");
             string adres = ReadString();
             int id = IdGenerator.GenerateId(library.Users.Select(i => i.Id).ToList());
             User user = new User(id, name, email, adres);

@@ -11,41 +11,41 @@ namespace LibraryOP
             Graphic();
             Console.WriteLine("Naciśnij dowolny klawisz, aby kontynuować.");
             Console.ReadKey();
-            string choice = String.Empty;
-            while (choice != "0")
+            int choice = -1;
+            while (choice != 0)
             {
                 MenuOptions();
-                choice = Console.ReadLine();
+                choice = ReadInt();
                 switch (choice)
                 {
-                    case "1":
+                    case 1:
                         MenuAddItem(library);
                         break;
-                    case "2":
+                    case 2:
                         MenuRemoveItem(library);
                         break;
-                    case "3":
+                    case 3:
                         MenuRentItem(library);
                         break;
-                    case "4":
+                    case 4:
                         MenuReturnItem(library);
                         break;
-                    case "5":
+                    case 5:
                         MenuListItems(library);
                         break;
-                    case "6":
+                    case 6:
                         MenuAddUser(library);
                         break;
-                    case "7":
+                    case 7:
                         MenuRemoveUser(library);
                         break;
-                    case "8":
+                    case 8:
                         MenuListUsers(library);
                         break;
-                    case "9":
+                    case 9:
                         MenuSaveDB(library);
                         break;
-                    case "0":
+                    case 0:
                         MenuSaveDB(library);
                         Console.WriteLine("Dziękujemy za skorzystanie z naszego programu.");
                         break;
@@ -111,30 +111,30 @@ namespace LibraryOP
 
         private static void MenuAddItem(ILibrary library)
         {
-            string addChoice = String.Empty;            
-            while (addChoice != "5")
+            int addChoice = -1;
+            while (addChoice != 5)
             {
                 AddMenuOption();
-                addChoice = Console.ReadLine();
+                addChoice = ReadInt();
                 switch (addChoice)
                 {
-                    case "1":
+                    case 1:
                         MenuAddBook(library);
                         Console.ReadKey();
                         break;
-                    case "2":
+                    case 2:
                         MenuAddMagazine(library);
                         Console.ReadKey();
                         break;
-                    case "3":
+                    case 3:
                         MenuAddMovie(library);
                         Console.ReadKey();
                         break;
-                    case "4":
+                    case 4:
                         MenuAddScientificPaper(library);
                         Console.ReadKey();
                         break;
-                    case "5":
+                    case 5:
                         MenuSaveDB(library);
                         Console.WriteLine("Powrót do menu głównego.");
                         break;
@@ -215,6 +215,7 @@ namespace LibraryOP
             library.ListUsers();
             Console.WriteLine("Operacja zakończyła się powodzeniem.");
         }
+
         private static void MenuSaveDB(ILibrary library)
         {
             Console.Clear();
@@ -313,16 +314,19 @@ namespace LibraryOP
 
         private static int ReadInt()
         {
+            var input = "";
             int readInt = 0;
-            while (readInt == 0)
+            while (readInt == 0 && input !="0")
             {
-                int.TryParse(Console.ReadLine(), out readInt);
-                if (readInt == 0)
+                input = Console.ReadLine();
+                int.TryParse(input, out readInt);
+                if (readInt == 0 && input != "0")
                 {
                     Console.WriteLine("Wprowadzona wartość nie jest numerem. \n" + "Spróbuj ponownie.");
                 }
             }
             return readInt;
         }
+
     }
 }

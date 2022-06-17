@@ -46,8 +46,8 @@ namespace LibraryOP
                         MenuSaveDB(library);
                         break;
                     case "0":
-                        Console.WriteLine("Dziękujemy za skorzystanie z naszego programu.");
                         MenuSaveDB(library);
+                        Console.WriteLine("Dziękujemy za skorzystanie z naszego programu.");
                         break;
                     default:
                         Console.WriteLine("Proszę wybrać którąś z opcji podanych w menu.");
@@ -75,6 +75,17 @@ namespace LibraryOP
             Console.WriteLine("0. Wyjdź z programu.");
         }
 
+        private static void AddMenuOption()
+        {
+            Console.Clear();
+            Console.WriteLine("Wybierz przedmiot, który chcesz dodać.");
+            Console.WriteLine("1. Dodaj książkę.");
+            Console.WriteLine("2. Dodaj magazyn.");
+            Console.WriteLine("3. Dodaj film.");
+            Console.WriteLine("4. Dodaj magazyn naukowy.");
+            Console.WriteLine("5. Powrót.");
+        }
+
         private static void Graphic()
         {
             Console.WriteLine("         .-.                                        \n" +
@@ -100,31 +111,38 @@ namespace LibraryOP
 
         private static void MenuAddItem(ILibrary library)
         {
-            Console.Clear();
-            Console.WriteLine("Wybierz przedmiot, który chcesz dodać.");
-            Console.WriteLine("1. Dodaj książkę.");
-            Console.WriteLine("2. Dodaj magazyn.");
-            Console.WriteLine("3. Dodaj film.");
-            Console.WriteLine("4. Dodaj magazyn naukowy.");
-            string addChoice = Console.ReadLine();
-            switch (addChoice)
+            string addChoice = String.Empty;            
+            while (addChoice != "5")
             {
-                case "1":
-                    MenuAddBook(library);
-                    break;
-                case "2":
-                    MenuAddMagazine(library);
-                    break;
-                case "3":
-                    MenuAddMovie(library);
-                    break;
-                case "4":
-                    MenuAddScientificPaper(library);
-                    break;
+                AddMenuOption();
+                addChoice = Console.ReadLine();
+                switch (addChoice)
+                {
+                    case "1":
+                        MenuAddBook(library);
+                        Console.ReadKey();
+                        break;
+                    case "2":
+                        MenuAddMagazine(library);
+                        Console.ReadKey();
+                        break;
+                    case "3":
+                        MenuAddMovie(library);
+                        Console.ReadKey();
+                        break;
+                    case "4":
+                        MenuAddScientificPaper(library);
+                        Console.ReadKey();
+                        break;
+                    case "5":
+                        MenuSaveDB(library);
+                        Console.WriteLine("Powrót do menu głównego.");
+                        break;
 
-                default:
-                    Console.WriteLine("Nie wybrałeś opcji z listy.");
-                    break;
+                    default:
+                        Console.WriteLine("Nie wybrałeś opcji z listy.");
+                        break;
+                }                
             }
         }
 
@@ -201,7 +219,7 @@ namespace LibraryOP
         {
             Console.Clear();
             library.SaveDb();
-            Console.WriteLine("Operacja zakończyła się powodzeniem.");
+            Console.WriteLine("Baza danych została zapisana.");
         }
 
         private static void MenuAddBook(ILibrary library)
@@ -280,7 +298,7 @@ namespace LibraryOP
 
         private static string ReadString()
         {
-            string readText = "";            
+            string readText = String.Empty;            
             while (string.IsNullOrWhiteSpace(readText))
             {
                 readText = Console.ReadLine();
@@ -289,6 +307,7 @@ namespace LibraryOP
                     Console.WriteLine("Wprowadzona wartość jest nieprawidłowa. \n" + "Spróbuj ponownie.");
                 }
             }
+            readText = readText.Trim();
             return readText;
         }
 

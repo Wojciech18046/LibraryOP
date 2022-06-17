@@ -100,6 +100,8 @@ namespace LibraryOP
 
         private static void MenuAddItem(ILibrary library)
         {
+            Console.Clear();
+            Console.WriteLine("Wybierz przedmiot, który chcesz dodać.");
             Console.WriteLine("1. Dodaj książkę.");
             Console.WriteLine("2. Dodaj magazyn.");
             Console.WriteLine("3. Dodaj film.");
@@ -128,6 +130,7 @@ namespace LibraryOP
 
         private static void MenuRemoveItem(ILibrary library)
         {
+            Console.Clear();
             Console.WriteLine("Proszę wprowadzić numer ID przedmiotu, który chcesz usunąć.");
             int id = ReadInt();
             library.RemoveItem(id);
@@ -136,6 +139,7 @@ namespace LibraryOP
 
         private static void MenuRentItem(ILibrary library)
         {
+            Console.Clear();
             Console.WriteLine("Proszę wprowadzić kood kreskowy przedmiotu, następnie numer ID użytkownika.");
             int id = ReadInt();
             int userid = ReadInt();
@@ -145,6 +149,7 @@ namespace LibraryOP
 
         private static void MenuReturnItem(ILibrary library)
         {
+            Console.Clear();
             Console.WriteLine("Proszę wprowadzić numer ID przedmiotu, który chcesz oddać.");
             int id = ReadInt();
             library.ReturnItem(id);
@@ -153,13 +158,16 @@ namespace LibraryOP
 
         private static void MenuListItems(ILibrary library)
         {
+            Console.Clear();
             Console.WriteLine("Lista wszystkich przedmiotów.");
+            Console.WriteLine("--------------------------------------------------------------------");
             library.ListItems();
             Console.WriteLine("Operacja zakończyła się powodzeniem.");
         }
 
         static void MenuAddUser(ILibrary library)
         {
+            Console.Clear();
             Console.WriteLine("Wprowadź nazwę użytkownika.");
             string name = ReadString();
             Console.WriteLine("Wprowadź adres email.");
@@ -174,6 +182,7 @@ namespace LibraryOP
 
         private static void MenuRemoveUser(ILibrary library)
         {
+            Console.Clear();
             Console.WriteLine("Proszę wprowadzić numer ID użytkownika, którego chcesz usunąć.");
             int id = ReadInt();
             library.RemoveUser(id);
@@ -182,8 +191,16 @@ namespace LibraryOP
 
         private static void MenuListUsers(ILibrary library)
         {
+            Console.Clear();
             Console.WriteLine("Lista wszystkich użytkowników.");
+            Console.WriteLine("------------------------------");
             library.ListUsers();
+            Console.WriteLine("Operacja zakończyła się powodzeniem.");
+        }
+        private static void MenuSaveDB(ILibrary library)
+        {
+            Console.Clear();
+            library.SaveDb();
             Console.WriteLine("Operacja zakończyła się powodzeniem.");
         }
 
@@ -258,12 +275,6 @@ namespace LibraryOP
             int id = IdGenerator.GenerateId(library.Items.Select(i => i.Id).ToList());
             ScientificPaper scientificPaper = new ScientificPaper(id, barCode, name, scienceField, journal, count, autor);
             library.AddItem(scientificPaper);
-            Console.WriteLine("Operacja zakończyła się powodzeniem.");
-        }
-
-        private static void MenuSaveDB(ILibrary library)
-        {
-            library.SaveDb();
             Console.WriteLine("Operacja zakończyła się powodzeniem.");
         }
 

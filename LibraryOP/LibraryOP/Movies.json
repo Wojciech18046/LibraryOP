@@ -1,0 +1,7 @@
+{"Genre":"Horror","Duration":90,"Director":"Juźwik","Id":1150,"BarCode":325566,"Name":"IT","IsRented":false,"RentedById":null};
+{"Genre":"Komedia","Duration":75,"Director":"Addams","Id":143,"BarCode":1483532,"Name":"Ja robot","IsRented":false,"RentedById":null};
+{"Genre":"Dramat","Duration":120,"Director":"Mlekożegna","Id":21354,"BarCode":17345,"Name":"Żółwie Ninja","IsRented":true,"RentedById":7};
+{"Genre":"Sport","Duration":45,"Director":"Mlekowita","Id":9764,"BarCode":123213,"Name":"Kasztan","IsRented":false,"RentedById":null};
+{"Genre":"Thriller","Duration":64,"Director":"Kasanowa","Id":536,"BarCode":132131,"Name":"Straszny film","IsRented":false,"RentedById":null};
+{"Genre":"Horror","Duration":72,"Director":"Vega","Id":643564,"BarCode":97740,"Name":"Śmieszny film","IsRented":false,"RentedById":null};
+{"Genre":"Akcja","Duration":96,"Director":"Gruby","Id":75834,"BarCode":74785,"Name":"Pigbull","IsRented":true,"RentedById":2};

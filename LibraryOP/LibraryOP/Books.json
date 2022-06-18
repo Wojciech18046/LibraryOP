@@ -1,0 +1,7 @@
+{"Genre":"Science-Fiction","PageCount":350,"Author":"JRRolins","Id":2,"BarCode":74583355,"Name":"Hari-Pota","IsRented":true,"RentedById":2};
+{"Genre":"Science-Fiction","PageCount":350,"Author":"JRRolins","Id":3,"BarCode":74583355,"Name":"Hari-Pota","IsRented":true,"RentedById":4};
+{"Genre":"Science-Fiction","PageCount":350,"Author":"JRRolins","Id":4,"BarCode":74583355,"Name":"Hari-Pota","IsRented":true,"RentedById":8};
+{"Genre":"Science-Fiction","PageCount":350,"Author":"JRRolins","Id":5,"BarCode":74583355,"Name":"Hari-Pota","IsRented":true,"RentedById":9};
+{"Genre":"Finanse","PageCount":123,"Author":"Marek Kiepur","Id":682219,"BarCode":15326312,"Name":"KiepCoin","IsRented":false,"RentedById":null};
+{"Genre":"Programowanie","PageCount":223,"Author":"Piotr Kiepurski","Id":2355235,"BarCode":1542352,"Name":"Przygody na Javie","IsRented":false,"RentedById":null};
+{"Genre":"Naukowe","PageCount":643,"Author":"Józef Grechuta","Id":22354819,"BarCode":1245155642,"Name":"Muzyka, a obyczaje","IsRented":true,"RentedById":5};

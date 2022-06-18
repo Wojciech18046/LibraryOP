@@ -1,0 +1,4 @@
+{"ScienceField":"Fizyka","Journal":"Fiziksajens","PageCount":50,"Author":"Michel Angelo","Id":880,"BarCode":135632,"Name":"Wyładowania","IsRented":false,"RentedById":null};
+{"ScienceField":"Biologia","Journal":"Biolajf","PageCount":66,"Author":"Leonardo","Id":8822,"BarCode":12466,"Name":"Komórka","IsRented":false,"RentedById":null};
+{"ScienceField":"Chemia","Journal":"ReakcjaChemiczna","PageCount":42,"Author":"Donatello","Id":834,"BarCode":31253,"Name":"Mefedron by Kozacko","IsRented": true,"RentedById":6};
+{"ScienceField":"Geodezja","Journal":"Kamyczki","PageCount":69,"Author":"Raphael","Id":746,"BarCode":123467,"Name":"Kamienie i głazy","IsRented":false,"RentedById":null};

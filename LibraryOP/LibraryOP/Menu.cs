@@ -142,37 +142,75 @@ namespace LibraryOP
                     default:
                         Console.WriteLine("Nie wybrałeś opcji z listy.");
                         break;
-                }                
+                }
             }
         }
 
         private static void MenuRemoveItem(ILibrary library)
         {
             Console.Clear();
-            Console.WriteLine("Proszę wprowadzić numer ID przedmiotu, który chcesz usunąć.");
-            int id = ReadInt();
-            library.RemoveItem(id);
-            Console.WriteLine("Operacja zakończyła się powodzeniem.");
+            Console.WriteLine("Podaj ID przedmiotu do usunięcia:\n");
+            if (int.TryParse(Console.ReadLine(), out int id))
+            {
+                try
+                {
+                    library.RemoveItem(id);
+                    Console.WriteLine("Operacja zakończyła się powodzeniem.");
+                }
+                catch (Exception error)
+                {
+                    Console.WriteLine(error.Message);
+                }
+            }
+            else
+            {
+                Console.WriteLine("Wprowadzona wartoiść nie jest numerem ID.");
+            }
+
         }
 
         private static void MenuRentItem(ILibrary library)
         {
             Console.Clear();
-            Console.WriteLine("Proszę wprowadzić kood kreskowy przedmiotu.");
-            int id = ReadInt();
-            Console.WriteLine("Proszę wprowadzić numer Id użytkownika.");
-            int userid = ReadInt();
-            library.RentItem(id, userid);
-            Console.WriteLine("Operacja zakończyła się powodzeniem.");
+            Console.WriteLine("Proszę wprowadzić numer ID przedmiotu, następnie numer ID użytkownika.");
+            if (int.TryParse(Console.ReadLine(), out int id) && int.TryParse(Console.ReadLine(), out int userid))
+            {
+                try
+                {
+                    library.RentItem(id, userid);
+                    Console.WriteLine("Operacja zakończyła się powodzeniem.");
+                }
+                catch (Exception error)
+                {
+                    Console.WriteLine(error.Message);
+                }
+            }
+            else
+            {
+                Console.WriteLine("Wprowadzona wartość nie jest numerem ID.");
+            }
         }
 
         private static void MenuReturnItem(ILibrary library)
         {
             Console.Clear();
             Console.WriteLine("Proszę wprowadzić numer ID przedmiotu, który chcesz oddać.");
-            int id = ReadInt();
-            library.ReturnItem(id);
-            Console.WriteLine("Operacja zakończyła się powodzeniem.");
+            if (int.TryParse(Console.ReadLine(), out int id))
+            {
+                try
+                {
+                    library.ReturnItem(id);
+                    Console.WriteLine("Operacja zakończyła się powodzeniem.");
+                }
+                catch (Exception error)
+                {
+                    Console.WriteLine(error.Message);
+                }
+            }
+            else
+            {
+                Console.WriteLine("Wprowadzona wartość nie jest numerem ID.");
+            }
         }
 
         private static void MenuListItems(ILibrary library)
@@ -203,9 +241,22 @@ namespace LibraryOP
         {
             Console.Clear();
             Console.WriteLine("Proszę wprowadzić numer ID użytkownika, którego chcesz usunąć.");
-            int id = ReadInt();
-            library.RemoveUser(id);
-            Console.WriteLine("Operacja zakończyła się powodzeniem.");
+            if (int.TryParse(Console.ReadLine(), out int id))
+            {
+                try
+                {
+                    library.RemoveUser(id);
+                    Console.WriteLine("Operacja zakończyła się powodzeniem.");
+                }
+                catch (Exception error)
+                {
+                    Console.WriteLine(error.Message);
+                }
+            }
+            else
+            {
+                Console.WriteLine("Wprowadzona wartość nie jest numerem ID.");
+            }
         }
 
         private static void MenuListUsers(ILibrary library)
@@ -232,7 +283,7 @@ namespace LibraryOP
             string name = ReadString();
             Console.WriteLine("Proszę wprowadzić gatunek.");
             string genre = ReadString();
-            Console.WriteLine("Proszę wprowadzić ilość stron.");            
+            Console.WriteLine("Proszę wprowadzić ilość stron.");
             int count = ReadInt();
             Console.WriteLine("Proszę wprowadzić autora.");
             string autor = ReadString();
@@ -245,13 +296,13 @@ namespace LibraryOP
         private static void MenuAddMagazine(ILibrary library)
         {
             Console.WriteLine("Proszę wprowadzić kod kreskowy.");
-            int barCode = ReadInt();            
+            int barCode = ReadInt();
             Console.WriteLine("Proszę wprowadzić nazwę.");
             string name = ReadString();
             Console.WriteLine("Proszę wprowadzić temat.");
             string subject = ReadString();
             Console.WriteLine("Proszę wprowadzić ilość stron.");
-            int count = ReadInt();            
+            int count = ReadInt();
             Console.WriteLine("Proszę wprowadzić autora.");
             string autor = ReadString();
             int id = IdGenerator.GenerateId(library.Items.Select(i => i.Id).ToList());
@@ -273,7 +324,7 @@ namespace LibraryOP
             Console.WriteLine("Proszę wprowadzić reżysera.");
             string director = ReadString();
             int id = IdGenerator.GenerateId(library.Items.Select(i => i.Id).ToList());
-            Movie movie = new Movie(id,barCode, name, genre, duration, director);
+            Movie movie = new Movie(id, barCode, name, genre, duration, director);
             library.AddItem(movie);
             Console.WriteLine("Operacja zakończyła się powodzeniem.");
         }
@@ -300,7 +351,7 @@ namespace LibraryOP
 
         private static string ReadString()
         {
-            string readText = String.Empty;            
+            string readText = String.Empty;
             while (string.IsNullOrEmpty(readText))
             {
                 readText = Console.ReadLine();

@@ -60,19 +60,47 @@ namespace LibraryOP
             }
             else if (typeof(T) == typeof(Movie))
             {
-                //WriteType<Movie>(RewriteCollectionAsList<Movie>(libraryObjectCollection), _movieDBName);
+                var list = new List<Movie>();
+
+                foreach (var libraryObject in libraryObjectCollection)
+                {
+                    list.Add((Movie)(LibraryItem)libraryObject);
+                }
+
+                WriteType<Movie>(list, _movieDBName);
             }
             else if (typeof(T) == typeof(Magazine))
             {
-                //WriteType<Magazine>(RewriteCollectionAsList<Magazine>(libraryObjectCollection), _magazineDBName);
+                var list = new List<Magazine>();
+
+                foreach (var libraryObject in libraryObjectCollection)
+                {
+                    list.Add((Magazine)(LibraryItem)libraryObject);
+                }
+
+                WriteType<Magazine>(list, _magazineDBName);
             }
             else if (typeof(T) == typeof(ScientificPaper))
             {
-                //WriteType<ScientificPaper>(RewriteCollectionAsList<ScientificPaper>(libraryObjectCollection), _scientificPaperDBName);
+                var list = new List<ScientificPaper>();
+
+                foreach (var libraryObject in libraryObjectCollection)
+                {
+                    list.Add((ScientificPaper)libraryObject);
+                }
+
+                WriteType<ScientificPaper>(list, _scientificPaperDBName);
             }
             else if (typeof(T) == typeof(User))
             {
-                //WriteType<User>(RewriteCollectionAsList<User>(libraryObjectCollection), _userDBName);
+                var list = new List<User>();
+
+                foreach (var libraryObject in libraryObjectCollection)
+                {
+                    list.Add((User)(libraryObject));
+                }
+
+                WriteType<User>(list, _userDBName);
             }
             else
             {

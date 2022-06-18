@@ -172,7 +172,7 @@ namespace LibraryOP
         private static void MenuRentItem(ILibrary library)
         {
             Console.Clear();
-            Console.WriteLine("Proszę wprowadzić numer ID przedmiotu, następnie numer ID użytkownika.");
+            Console.WriteLine("Proszę wprowadzić kod kreskowy przedmiotu, następnie numer ID użytkownika.");
             if (int.TryParse(Console.ReadLine(), out int id) && int.TryParse(Console.ReadLine(), out int userid))
             {
                 try

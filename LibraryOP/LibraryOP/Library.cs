@@ -79,7 +79,7 @@ namespace LibraryOP
 
         public void ListItems()
         {
-            foreach (var item in Items)//.OrderBy(x => x.GetType()))
+            foreach (var item in Items.OrderBy(x => x.GetType().ToString()))
             {
                 if (item is Movie)
                 {
@@ -136,7 +136,7 @@ namespace LibraryOP
 
         public void ListUsers()
         {
-            foreach (var user in Users)
+            foreach (var user in Users.OrderBy(x => x.Name))
             {
                 Console.WriteLine($"ID: {user.Id} | Imie: {user.Name} | Email: {user.Email}");
                 Console.WriteLine($"Adres: {user.Address}");

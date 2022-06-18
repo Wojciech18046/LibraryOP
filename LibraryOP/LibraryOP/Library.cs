@@ -127,7 +127,6 @@ namespace LibraryOP
             if (user != null)
             {
                 Users.Remove(user);
-                //TODO: Remove from DB #2
             }
             else
             {

@@ -317,14 +317,11 @@ namespace LibraryOP
         {
             var input = "";
             int readInt = 0;
-            while (readInt == 0 && input !="0")
+            input = Console.ReadLine();
+            while (!int.TryParse(input, out readInt))
             {
+                Console.WriteLine("Wprowadzona wartość nie jest numerem. \n" + "Spróbuj ponownie.");
                 input = Console.ReadLine();
-                int.TryParse(input, out readInt);
-                if (readInt == 0 && input != "0")
-                {
-                    Console.WriteLine("Wprowadzona wartość nie jest numerem. \n" + "Spróbuj ponownie.");
-                }
             }
             return readInt;
         }

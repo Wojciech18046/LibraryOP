@@ -68,7 +68,6 @@ namespace LibraryOP
                 }
 
                 WriteType<Movie>(list, _movieDBName);
-                //WriteType<Movie>(RewriteCollectionAsList<Movie>(libraryObjectCollection), _movieDBName);
             }
             else if (typeof(T) == typeof(Magazine))
             {
@@ -80,7 +79,6 @@ namespace LibraryOP
                 }
 
                 WriteType<Magazine>(list, _magazineDBName);
-                //WriteType<Magazine>(RewriteCollectionAsList<Magazine>(libraryObjectCollection), _magazineDBName);
             }
             else if (typeof(T) == typeof(ScientificPaper))
             {
@@ -88,11 +86,10 @@ namespace LibraryOP
 
                 foreach (var libraryObject in libraryObjectCollection)
                 {
-                    list.Add((ScientificPaper)(LibraryItem)libraryObject);
+                    list.Add((ScientificPaper)libraryObject);
                 }
 
                 WriteType<ScientificPaper>(list, _scientificPaperDBName);
-                //WriteType<ScientificPaper>(RewriteCollectionAsList<ScientificPaper>(libraryObjectCollection), _scientificPaperDBName);
             }
             else if (typeof(T) == typeof(User))
             {
@@ -100,11 +97,10 @@ namespace LibraryOP
 
                 foreach (var libraryObject in libraryObjectCollection)
                 {
-                    list.Add((User)(User)libraryObject);
+                    list.Add((User)(libraryObject));
                 }
 
                 WriteType<User>(list, _userDBName);
-                //WriteType<User>(RewriteCollectionAsList<User>(libraryObjectCollection), _userDBName);
             }
             else
             {

@@ -36,7 +36,7 @@ namespace LibraryOP
             }
             else
             {
-                throw new Exception("Nieprawidlowy ID lub ta pozycja nie istnieje...");
+                throw new Exception("Nieprawidlowy ID...");
             }
         }
 
@@ -79,7 +79,7 @@ namespace LibraryOP
 
         public void ListItems()
         {
-            foreach (var item in Items.OrderBy(x => x.GetType()))
+            foreach (var item in Items)//.OrderBy(x => x.GetType()))
             {
                 if (item is Movie)
                 {
@@ -130,7 +130,7 @@ namespace LibraryOP
             }
             else
             {
-                throw new InvalidOperationException("Nieprawidlowy ID lub ten uzytkownik nie istnieje...");
+                throw new Exception("Nieprawidlowy ID lub ten uzytkownik nie istnieje...");
             }
         }
 

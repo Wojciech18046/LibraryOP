@@ -135,7 +135,7 @@ namespace LibraryOP
                     library.RemoveItem(id);
                     Console.WriteLine("Operacja zakończyła się powodzeniem.");
                 }
-                catch (InvalidOperationException error)
+                catch (Exception error)
                 {
                     Console.WriteLine(error.Message);
                 }
@@ -156,7 +156,7 @@ namespace LibraryOP
                     library.RentItem(id, userid);
                     Console.WriteLine("Operacja zakończyła się powodzeniem.");
                 }
-                catch (InvalidOperationException error)
+                catch (Exception error)
                 {
                     Console.WriteLine(error.Message);
                 }
@@ -177,7 +177,7 @@ namespace LibraryOP
                     library.ReturnItem(id);
                     Console.WriteLine("Operacja zakończyła się powodzeniem.");
                 }
-                catch (InvalidOperationException error)
+                catch (Exception error)
                 {
                     Console.WriteLine(error.Message);
                 }
@@ -219,7 +219,7 @@ namespace LibraryOP
                     library.RemoveUser(id);
                     Console.WriteLine("Operacja zakończyła się powodzeniem.");
                 }
-                catch (InvalidOperationException error)
+                catch (Exception error)
                 {
                     Console.WriteLine(error.Message);
                 }

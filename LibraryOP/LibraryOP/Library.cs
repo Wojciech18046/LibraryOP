@@ -36,7 +36,7 @@ namespace LibraryOP
             }
             else
             {
-                throw new InvalidOperationException("Nieprawidlowy ID lub ta pozycja nie istnieje...");
+                throw new Exception("Nieprawidlowy ID lub ta pozycja nie istnieje...");
             }
         }
 
@@ -46,7 +46,7 @@ namespace LibraryOP
 
             if (user == null)
             {
-                throw new InvalidOperationException("Użytkownik nie istnieje w bazie danych.");
+                throw new Exception("Użytkownik nie istnieje w bazie danych.");
             }
 
             var itemsToRent = Items.Where(i => i.BarCode == barCode && i.IsRented == false && i.RentedById == null);
@@ -59,7 +59,7 @@ namespace LibraryOP
             }
             else
             {
-                throw new InvalidOperationException("Brak wolnych egzemplarzy lub książka nie istnieje w bazie danych.");
+                throw new Exception("Brak wolnych egzemplarzy lub książka nie istnieje w bazie danych.");
             }
         }
 
@@ -73,7 +73,7 @@ namespace LibraryOP
             }
             else
             {
-                throw new InvalidOperationException("Nieprawidlowy ID lub ta pozycja nie istnieje...");
+                throw new Exception("Nieprawidlowy ID lub ta pozycja nie istnieje...");
             }
         }
 

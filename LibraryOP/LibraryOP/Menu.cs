@@ -130,8 +130,15 @@ namespace LibraryOP
         {
             if (int.TryParse(Console.ReadLine(), out int id))
             {
-                library.RemoveItem(id);
-                Console.WriteLine("Operacja zakończyła się powodzeniem.");
+                try
+                {
+                    library.RemoveItem(id);
+                    Console.WriteLine("Operacja zakończyła się powodzeniem.");
+                }
+                catch (InvalidOperationException error)
+                {
+                    Console.WriteLine(error.Message);
+                }
             }
             else
             {
@@ -144,8 +151,15 @@ namespace LibraryOP
             Console.WriteLine("Proszę wprowadzić numer ID przedmiotu, następnie numer ID użytkownika.");
             if (int.TryParse(Console.ReadLine(), out int id) && int.TryParse(Console.ReadLine(), out int userid))
             {
-                library.RentItem(id, userid);
-                Console.WriteLine("Operacja zakończyła się powodzeniem.");
+                try
+                {
+                    library.RentItem(id, userid);
+                    Console.WriteLine("Operacja zakończyła się powodzeniem.");
+                }
+                catch (InvalidOperationException error)
+                {
+                    Console.WriteLine(error.Message);
+                }
             }
             else
             {
@@ -158,8 +172,15 @@ namespace LibraryOP
             Console.WriteLine("Proszę wprowadzić numer ID przedmiotu, który chcesz oddać.");
             if (int.TryParse(Console.ReadLine(), out int id))
             {
-                library.ReturnItem(id);
-                Console.WriteLine("Operacja zakończyła się powodzeniem.");
+                try
+                {
+                    library.ReturnItem(id);
+                    Console.WriteLine("Operacja zakończyła się powodzeniem.");
+                }
+                catch (InvalidOperationException error)
+                {
+                    Console.WriteLine(error.Message);
+                }
             }
             else
             {
@@ -193,8 +214,15 @@ namespace LibraryOP
             Console.WriteLine("Proszę wprowadzić numer ID użytkownika, którego chcesz usunąć.");
             if (int.TryParse(Console.ReadLine(), out int id))
             {
-                library.RemoveUser(id);
-                Console.WriteLine("Operacja zakończyła się powodzeniem.");
+                try
+                {
+                    library.RemoveUser(id);
+                    Console.WriteLine("Operacja zakończyła się powodzeniem.");
+                }
+                catch (InvalidOperationException error)
+                {
+                    Console.WriteLine(error.Message);
+                }
             }
             else
             {
@@ -306,7 +334,7 @@ namespace LibraryOP
             Console.WriteLine("Proszę wprowadzić reżysera.");
             string director = Console.ReadLine();
             int id = IdGenerator.GenerateId(library.Items.Select(i => i.Id).ToList());
-            Movie movie = new Movie(id,barCode, name, genre, duration, director);
+            Movie movie = new Movie(id, barCode, name, genre, duration, director);
             library.AddItem(movie);
             Console.WriteLine("Operacja zakończyła się powodzeniem.");
         }
